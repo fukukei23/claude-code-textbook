@@ -190,9 +190,24 @@ a:hover { text-decoration: underline; }
 .chapter-nav-top {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 8px;
     margin-bottom: 20px;
     font-size: 0.85rem;
+}
+.nav-home {
+    color: var(--text-secondary);
+    padding: 8px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.82rem;
+    transition: border-color 0.15s, color 0.15s;
+}
+.nav-home:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    text-decoration: none;
 }
 .nav-prev, .nav-next {
     color: var(--accent);

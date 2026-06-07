@@ -23,7 +23,9 @@ CHAPTER_MAP = {
     "04_知識管理.md": {"slug": "04-knowledge", "title": "知識管理", "icon": "📚", "desc": "なぜ記録が必要・SSOTの概念・日記の書き方"},
     "05_自動化と拡張.md": {"slug": "05-automation", "title": "自動化と拡張", "icon": "⚙️", "desc": "フック・cron・MCPサーバー・スキル自作"},
     "06_安全な使い方.md": {"slug": "06-security", "title": "安全な使い方", "icon": "🔒", "desc": "APIキー管理・コスト意識・リスク対策"},
+    "07_GitHub入門.md": {"slug": "07-github", "title": "GitHub入門", "icon": "🐙", "desc": "Git/GitHubの概念・基本操作・実践ガイド"},
     "別冊_コマンドリファレンス.md": {"slug": "ref-commands", "title": "コマンドリファレンス", "icon": "⌨️", "desc": "よく使うコマンド一覧"},
+    "別冊_さっとわかる版.md": {"slug": "ref-quick", "title": "さっとわかる版", "icon": "⚡", "desc": "全章の重要概念を1ページにまとめた超入門"},
     "別冊_トラブルシューティング.md": {"slug": "ref-troubleshoot", "title": "トラブルシューティング", "icon": "🔧", "desc": "よくあるエラーと直し方"},
     "別冊_用語集.md": {"slug": "ref-glossary", "title": "用語集", "icon": "📖", "desc": "AI・Claude Code用語のはじめて解説"},
     "別冊_プロンプト例文集.md": {"slug": "ref-prompts", "title": "プロンプト例文集", "icon": "💬", "desc": "すぐ使えるテンプレート20選"},
@@ -350,6 +352,7 @@ CHAPTER_TEMPLATE = Template("""\
 
     <main class="content">
         <div class="chapter-nav-top">
+            <a href="../index.html" class="nav-home">🏠 ホーム</a>
             {% if prev_ch %}
             <a href="{{ prev_ch.slug }}.html" class="nav-prev">← {{ prev_ch.title }}</a>
             {% endif %}
@@ -369,6 +372,10 @@ CHAPTER_TEMPLATE = Template("""\
                 <span class="nav-title">{{ prev_ch.icon }} {{ prev_ch.title }}</span>
             </a>
             {% endif %}
+            <a href="../index.html" class="nav-card home">
+                <span class="nav-label">🏠</span>
+                <span class="nav-title">ホームに戻る</span>
+            </a>
             {% if next_ch %}
             <a href="{{ next_ch.slug }}.html" class="nav-card next">
                 <span class="nav-label">次の章 →</span>
