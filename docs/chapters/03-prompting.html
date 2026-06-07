@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プロンプト工学 — AI×Claude Code 教科書</title>
+    <meta name="description" content="AI×Claude Code 教科書 プロンプト工学の解説 — 高校生向けAIコーディング入門">
+    <meta property="og:title" content="プロンプト工学 — AI×Claude Code 教科書">
+    <meta property="og:description" content="AI×Claude Code 教科書 プロンプト工学の解説">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://fukukei23.github.io/claude-code-textbook/chapters/03-prompting.html">
+    <meta property="og:image" content="https://fukukei23.github.io/claude-code-textbook/assets/ogp.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <button class="menu-toggle" aria-label="メニュー" id="menuToggle">
+            <span></span><span></span><span></span>
+        </button>
+        <a href="../index.html" class="site-title">📚 AI×Claude Code 教科書</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="テーマ切替">
+            <span class="icon-light">☀️</span>
+            <span class="icon-dark">🌙</span>
+        </button>
+    </header>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html">🏠 ホーム</a>
+        </div>
+        
+        <a href="00-ai-basics.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🤖</span>
+            AIの基礎
+        </a>
+        
+        <a href="01-setup.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🏗️</span>
+            環境構築
+        </a>
+        
+        <a href="02-usage.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚡</span>
+            Claude Codeの使い方
+        </a>
+        
+        <a href="03-prompting.html"
+           class="sidebar-link active">
+            <span class="sidebar-icon">💬</span>
+            プロンプト工学
+        </a>
+        
+        <a href="04-knowledge.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">📚</span>
+            知識管理
+        </a>
+        
+        <a href="05-automation.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚙️</span>
+            自動化と拡張
+        </a>
+        
+        <a href="06-security.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🔒</span>
+            安全な使い方
+        </a>
+        
+        <a href="ref-commands.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⌨️</span>
+            コマンドリファレンス
+        </a>
+        
+        <a href="ref-troubleshoot.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🔧</span>
+            トラブルシューティング
+        </a>
+        
+        <a href="ref-prompts.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">💬</span>
+            プロンプト例文集
+        </a>
+        
+        <a href="ref-glossary.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">📖</span>
+            用語集
+        </a>
+        
+    </nav>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="content">
+        <div class="chapter-nav-top">
+            
+            <a href="02-usage.html" class="nav-prev">← Claude Codeの使い方</a>
+            
+            
+            <a href="04-knowledge.html" class="nav-next">知識管理 →</a>
+            
+        </div>
+
+        <article class="chapter-body">
+            <hr />
+<h2>title: &quot;プロンプト工学&quot;
+icon: &quot;edit&quot;</h2>
+<h1>プロンプト工学</h1>
+<p>プロンプト（Prompt）とは、Claudeに与える「指示文」のことです。同じ内容を聞いても、<strong>プロンプトの書き方次第で結果の質が大きく変わります</strong>。この章では、高品質な回答を引き出すための実践的なテクニックを説明します。すべての原則が大事ですが、まずは「具体性」と「文脈」の2つを意識하면十分です。</p>
+<hr />
+<h2>1. 原則1：具体的に書く（Be Specific）</h2>
+<p>一番大切な原則は「<strong>何をしてほしいかを具体的に伝える</strong>」ことです。漠然とした指示ほど、Claudeの回答も漠然としたものになります。</p>
+<h3>具体性のレベル</h3>
+<pre><code>漠然度（高）
+ │
+  │ 「コードを直して」              ← まず回答されない
+  │
+  │  「Pythonでエラーを直して」        ← どのファイルかわからない
+  │
+  │  「auth.pyのログイン関数を修正」    ← まだ不够
+  │
+  低
+  │  「auth.pyの authenticate_user() に、空文字チェックと
+  │   パスワード長さチェック（8文字以上）を追加し、
+  │   エラー時は ValueError を投げてほしい」
+</code></pre>
+<p><strong>具体的であればあるほど、Claudeはあなたの意図を正確に理解和実行できます</strong>。文件名、行番号、関数名を指定する習慣をつけましょう。</p>
+<h3>具体性の実例</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>状况</th>
+<th>漠然とした指示</th>
+<th>具体的な指示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>バグ修正</td>
+<td>「コードを直して」</td>
+<td>「<code>auth.py</code> の25行目〜40行目のログイン関数に空文字チェックを追加して」</td>
+</tr>
+<tr>
+<td>関数作成</td>
+<td>「排序の関数を作って」</td>
+<td>「整数の配列を昇順に排序する関数を作ってください。引数と戻り値の型も教えてください」</td>
+</tr>
+<tr>
+<td>エラー対応</td>
+<td>「動きません」</td>
+<td>「<code>pip install requests</code> を実行すると <code>SSLError</code> が出る。原因と解決方法を教えてください」</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>2. 原則2：文脈を与える（Give Context）</h2>
+<p>「なぜそれが必要か」「最終的な目標は何か」を伝えることで、Claudeはより適切なアドバイスができます。文脈がない状况では、Claudeは最も一般的な解答しがちです。</p>
+<h3>文脈があれば的回答が変わる例</h3>
+<pre><code class="language-python"># 文脈なし（不利な例）
+# 「このコードのエラーを修正して」
+def process(data):
+    return data.upper()
+
+# 文脈あり（良い例）
+# 「Eコマースの注文処理システムで使っています。
+#顧客名が空でも処理が進んでしまう問題を修正したい。
+#  このコードのエラーを修正してください」
+def process(data):
+    return data.upper()
+</code></pre>
+<p>文脈を与えることで、Claudeは「空文字チェックが必要」「注文データなのでNULL考慮が必要」など、<strong>表面的な修正以上のアドバイス</strong>をくれます。</p>
+<h3>文脈として有効な情報</h3>
+<ul>
+<li><strong>関連ファイルのコード片</strong>（直接貼り付けてOK）</li>
+<li><strong>最終的な目標</strong>（「〜というWebアプリを作りたい」）</li>
+<li><strong>制約条件</strong>（「処理時間は1秒以内にしたい」「Python3.10以前」）</li>
+<li><strong>既に試みたこと</strong>（「このアプローチではうまくいかなかった」）</li>
+<li><strong>エラー発生時の状況</strong>（「特定のユーザーだけ発生している」）</li>
+</ul>
+<hr />
+<h2>3. 原則3：複雑な作業は分割する（Break Down Tasks）</h2>
+<p>大きな任務は、一度に指示하지 말고<strong>小さな手順に分割</strong>しましょう。Claudeは一度に処理できる情報量（コンテキスト）に制限があります。すべての要素を同時に指示すると、それぞれが浅くなりがちです。</p>
+<h3>一括指示 vs 分割指示</h3>
+<pre><code>❌ 一括指示（不利）：
+「ユーザー登録機能を作って。DB設計も、APIエンドポイントも、
+バリデーションも全部やって」
+
+ → Claudeが疲れ果てる（コンテキスト限界）
+ → どれも中途半端になる
+
+✅ 分割指示（良い）：
+「まずDB設計から。ユーザーはID、名前、メールアドレス、パスワード、
+ 作成日時が必要。設計だけ見せてください」
+
+ → 回答を確認
+ → 「次に、この設計に基づいて usersテーブルを作成するSQLを見せてください」
+
+ → 回答を確認
+ → 「そのテーブルにデータを挿入するAPIエンドポイントをFlaskで作成して」
+</code></pre>
+<pre><code>分割指示の流れる:
+
+Step 1: 「DB設計を見せてください」 →確認OK
+ ↓
+Step 2: 「SQLで見せてください」   → 確認OK
+      ↓
+Step 3: 「APIを作ってください」 → 完成
+</code></pre>
+<p><strong>「まずXを見せてください。それが終わったらYをお願いします」と伝える</strong>だけで、結果の品質が大きく上がります。</p>
+<hr />
+<h2>4. 原則4：コードだけでなく「説明」も求める</h2>
+<p>「動くコード」は得られたけど「<strong>なぜそうなるのか</strong>」がわからないと、次に類似问题时自力で解決できません。常に「なぜ」を尋ねる習慣をつけましょう。</p>
+<h3>説明を求めるプロンプト例</h3>
+<pre><code>「この正規表現を説明してください。そして、自分が似た場面で
+使えるようになるためのポイントを3つ教えてください」
+
+「このコード为什么这样高效？请解释 time complexity ，
+ 그리고 다른 방법과의 trade-off も 알려주세요」
+
+「この関数の引数设计の意図を教えてください。
+ どんな場合にこの设计的优点が活きるのかもお願いします」
+</code></pre>
+<p><strong>「動くけど理解できないコード」は、実質的なスキルにはなりません</strong>。説明を求めることで、次に類似问题时自力で解決できるようになります。</p>
+<hr />
+<h2>5. Chain of Thought（思考の連鎖）</h2>
+<p>複雑な推論が必要な问题时、<code>think step by step</code>（一歩一歩考えて）と一言添えるだけで、Claudeの回答の質が劇的に向上します。これは Chain of Thought（思考の連鎖）と呼ばれるテクニックです。</p>
+<h3>通常の回答 vs Chain of Thought</h3>
+<pre><code>❌ 通常：
+「12,345 × 67 を計算して」
+→ 826,515 （答え만给出。過程が見えない）
+
+✅ Chain of Thought：
+「12,345 × 67 を計算して。step by stepで考えて」
+→ 12,345 × 67 を計算します。
+→まず 12,345 × 60 = 740,700
+→ 次に 12,345 × 7 = 86,415
+→ 合計: 740,700 + 86,415 = 827,115
+→ ※検算: 827,115 ÷ 67 = 12,345 ✓
+</code></pre>
+<h3>実用的な Chain of Thought の使い方</h3>
+<pre><code>「このバグの原因を step by stepで分析してください」
+
+「Pythonでのソートアルゴリズムを選択する基準を step by stepで
+ 説明して、それに基づいて私のケースに最适合なものを推荐して」
+
+「キャッシュ失效の問題考えられる原因を step by stepで列挙して、
+ それぞれの解決策もお願いします」
+</code></pre>
+<p>複雑な问题时、Claudeは途中で思考を間違うこともあります。その場合は「その推論の●手续が理解できません。もう一度お願いします」とフィードバックしましょう。</p>
+<hr />
+<h2>6. デバッグ：しくない回答が返ってきたとき</h2>
+<p>Claudeの回答が不正确な場合、責めるのではなく<strong>プロンプトを言い換える</strong>ことを试试。AIは意见すれば変わる生き物なので、同じ失敗を責めるより、視点を変えて再说得効果的です。</p>
+<h3>デバッグの手引き</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>状况</th>
+<th>尝试する对策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>回答が的外れ</td>
+<td>文脈を追加する（コード片・目标的を貼り付け）</td>
+</tr>
+<tr>
+<td>解決策が動かない</td>
+<td>エラーメッセージをそのまま貼り付ける</td>
+</tr>
+<tr>
+<td>解決策が複雑すぎる</td>
+<td>「もっと简单な方法は?&quot;&quot;と问う</td>
+</tr>
+<tr>
+<td>推論が間違う</td>
+<td><code>step by step</code>を添えて推論过程を見せる</td>
+</tr>
+<tr>
+<td>コードが古臭い</td>
+<td>「现代的なPythonではどう書きますか?」と问う</td>
+</tr>
+<tr>
+<td>欲しい结果と違う</td>
+<td>「○○の观点は考虑されていますか?」と补足</td>
+</tr>
+</tbody>
+</table></div>
+<h3>具体例</h3>
+<pre><code>❌ 責める言い方：
+「さっきの答え错误でした。やり直して」
+
+✅改善を求める言い方：
+「それは试しましたが ‘ModuleNotFoundError’ が出ました。
+ エラーメッセージ: [ここに貼り付け]
+ 原因と修正方法をstep by stepで教えてください」
+</code></pre>
+<p><strong>エラーメッセージをそのまま貼り付ける</strong>のは、最も简单で効果的なデバッグテクです。エラー文には原因の手がかりが必ず含まれているので、Claudeに передайтеことで正確な”问题在哪里”を探ってもらえます。</p>
+<hr />
+<h2>7. ロール・プロンプト（Role Prompting）</h2>
+<p>「あなたは〇〇の専門家です」と役割を与えると、専門家の知識が激活されて回答の質が上がります。これは Role Prompting（ロール・プロンプト）と呼ばれるテクニックです。</p>
+<h3>ロール・プロンプトの効果</h3>
+<pre><code>❌ 役割なし：
+「配列から重複を削除する方法を教えて」
+→ set()を使う方法などの基本的な回答
+
+✅ 役割あり：
+「あなたはPythonのSenior Engineerです。配列から重複を削除する
+ 方法を教えて。実務での選択基準も教えてください」
+→ set()の方法に加え、「辞書の順序維持が必要な場合は dict.fromkeys()」
+ 「大規模データでは NumPy の unique()」など、実務的な知識が加わる
+</code></pre>
+<h3>実用的なロール例</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>役割</th>
+<th>効果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Python Expert</code></td>
+<td>最新のPythonicな書き方で回答</td>
+</tr>
+<tr>
+<td><code>Code Reviewer</code></td>
+<td>バグ・改善点を具体的に指摘</td>
+</tr>
+<tr>
+<td><code>Teacher</code></td>
+<td>初心者のレベルに合わせて説明</td>
+</tr>
+<tr>
+<td><code>Debugging Expert</code></td>
+<td>システム的なデバッグ手順を提案</td>
+</tr>
+<tr>
+<td><code>Security Engineer</code></td>
+<td>セキュリティ上のリスクを指摘</td>
+</tr>
+</tbody>
+</table></div>
+<p>ロールを指定する場合は、「あなたは○○です」加上「〜这样的回答が欲しい」と付け加えると、より望む结果に近づけます。</p>
+<hr />
+<h2>8. 反復的アプローチ：少しずつ確かめながら進める</h2>
+<p>Claudeと効率的に作業するには、<strong>一度に完璧を求めすぎない</strong>ことが大事です。小さな一歩ずつ確認しながら進めると、失败した际のやり直しコスト 최소화できます。</p>
+<h3>反復的作业の流程</h3>
+<pre><code>❌ 一度に完美を求める（非効率）：
+「全部作った」→「错误了大量」→「どこが悪いのかわからない」
+
+✅ 小さな一歩ずつ確認（効率的）：
+「まず設計だけ見せてください」 → OK?
+  「次に骨組みを見せてください」 → OK?
+    「そこにロジックを追加してください」 → OK?
+      「完成!」 → 最初から全部正しい
+</code></pre>
+<h3>确认しやすい指示の例</h3>
+<pre><code>「まず、このログイン処理のフローチャートを見せてください」
+
+「次に、HTMLフォームの雛形を見せてください」
+
+「そのフォームから受け取ったデータを处理する部分を書いてください」
+
+「最後に、错误处理的を追加してください」
+</code></pre>
+<p>こうすることで、最悪の場合でも「やり直す範囲」が一小部分で済みます。最初から全部を作らせると、問題の切り分けが困难になります。</p>
+<hr />
+<h2>9. 制約・条件を指定する</h2>
+<p>Claudeに「こうなってほしい」と期望を伝えるのではなく、「这样的条件を満たす」ことを明確に指定すると、より精确な回答になります。</p>
+<h3>制約を指定する例</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>制約の種類</th>
+<th>指示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>言語バージョン</td>
+<td>「Python 3.10以前的语法で書いてください」</td>
+</tr>
+<tr>
+<td>性能制約</td>
+<td>「処理时间是100ms以内に収めてください」</td>
+</tr>
+<tr>
+<td>ファイル構成</td>
+<td>「单一行80文字、importはアルファベット順に並べてください」</td>
+</tr>
+<tr>
+<td>既存の风格</td>
+<td>「既存のコード同样的风格に合わせてください（例: <code>snake_case</code>）」</td>
+</tr>
+<tr>
+<td>外部依存</td>
+<td>「追加のライブラリ不许用。標準ライブラリ만使ってください」</td>
+</tr>
+</tbody>
+</table></div>
+<pre><code>❌ 漠然とした期望：
+「简单な代码で書いてください」
+
+✅ 明確な制約：
+「標準ライブラリ만使い、行数を20行以内に抑えてください。
+ variable名はすべて snake_case で統一してください」
+</code></pre>
+<p>制約を指定することで、Claudeが「最も简单な方法」を選びやすくなります。また、後からコードレビューする際にも、判断基準が明确なので检查がしやすくなります。</p>
+<hr />
+<h2>10. 出力形式を指定する</h2>
+<p>Claudeに「这样帮我整理成表格好吗？」のように、出力形式を指定できます。報告や資料作成時に有効です。</p>
+<h3>出力形式の指定例</h3>
+<pre><code>「APIエンドポイントを以下の表格で整理してください：
+| エンドポイント | HTTPメソッド | 説明 |」
+
+「引数の型とデフォルト値を以下の形式で見せてください：
+- arg1: str (必須) —説明
+- arg2: int = 10 (任意) — 説明」
+
+「エラーケースを以下の形式で列挙してください：
+【ケース名】原因と対策を简単に」
+</code></pre>
+<h3>コードの出力形式も指定可能</h3>
+<pre><code>「TypeScriptで書かれたReactコンポーネントを、
+以下の约束事项を守って書いてください：
+- FC&lt;Event&gt; 型をexport
+- CSS Modules используйте
+- Storybook のストーリーファイルも同時に生成」
+</code></pre>
+<p>出力形式を指定すると、Claudeの回答が後で使いやすくなります。受け取った後に手作业で整形する必要がなくなります。</p>
+<hr />
+<h2>11. まとめ：良いプロンプトの条件</h2>
+<p>ここまでの原則を整理します。</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>原則</th>
+<th>やること</th>
+<th>効果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>具体性</strong></td>
+<td>「どのファイルのどの部分」を明確に</td>
+<td>正確な回答</td>
+</tr>
+<tr>
+<td><strong>文脈</strong></td>
+<td>コード・目標・制約を添付</td>
+<td>適切なアドバイス</td>
+</tr>
+<tr>
+<td><strong>分割</strong></td>
+<td>複雑な任務は小步骤に</td>
+<td>品質維持</td>
+</tr>
+<tr>
+<td><strong>説明を求める</strong></td>
+<td>「なぜ」を常に尋ねる</td>
+<td>理解の深まり</td>
+</tr>
+<tr>
+<td><strong>Chain of Thought</strong></td>
+<td><code>step by step</code>を添える</td>
+<td>複雑な推論の正確化</td>
+</tr>
+<tr>
+<td><strong>デバッグ</strong></td>
+<td>プロンプトを言い換える</td>
+<td>的外れ回答の修正</td>
+</tr>
+<tr>
+<td><strong>ロール指定</strong></td>
+<td>専門家役割を付与</td>
+<td>専門知識の激活</td>
+</tr>
+</tbody>
+</table></div>
+<pre><code>良いプロンプト = 具体性 + 文脈 + 分割 + 説明要求
+      ↓
+ 「何を」「なぜ」「どの範囲で」
+ を明確にした指示文
+</code></pre>
+<p>これらの原則を組み合わせることで、Claude Codeの可能性を最大限度に引き出すことができます。すべてを思い出すのは難しいので、まずは「<strong>具体性</strong>」と「<strong>文脈</strong>」の2つを意識してみましょう。この2つだけで、回答の品質は劇的に向上します。</p>
+<p>次の章では、実際のプロジェクトでClaude Codeを活用する実践的な方法を学びます。</p>
+
+        </article>
+
+        <nav class="chapter-nav-bottom">
+            
+            <a href="02-usage.html" class="nav-card prev">
+                <span class="nav-label">← 前の章</span>
+                <span class="nav-title">⚡ Claude Codeの使い方</span>
+            </a>
+            
+            
+            <a href="04-knowledge.html" class="nav-card next">
+                <span class="nav-label">次の章 →</span>
+                <span class="nav-title">📚 知識管理</span>
+            </a>
+            
+        </nav>
+    </main>
+
+    <script src="../assets/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+            themeVariables: { fontSize: '14px' }
+        });
+    </script>
+</body>
+</html>

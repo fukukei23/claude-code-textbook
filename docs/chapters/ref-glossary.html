@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用語集 — AI×Claude Code 教科書</title>
+    <meta name="description" content="AI×Claude Code 教科書 用語集の解説 — 高校生向けAIコーディング入門">
+    <meta property="og:title" content="用語集 — AI×Claude Code 教科書">
+    <meta property="og:description" content="AI×Claude Code 教科書 用語集の解説">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://fukukei23.github.io/claude-code-textbook/chapters/ref-glossary.html">
+    <meta property="og:image" content="https://fukukei23.github.io/claude-code-textbook/assets/ogp.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <button class="menu-toggle" aria-label="メニュー" id="menuToggle">
+            <span></span><span></span><span></span>
+        </button>
+        <a href="../index.html" class="site-title">📚 AI×Claude Code 教科書</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="テーマ切替">
+            <span class="icon-light">☀️</span>
+            <span class="icon-dark">🌙</span>
+        </button>
+    </header>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html">🏠 ホーム</a>
+        </div>
+        
+        <a href="00-ai-basics.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🤖</span>
+            AIの基礎
+        </a>
+        
+        <a href="01-setup.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🏗️</span>
+            環境構築
+        </a>
+        
+        <a href="02-usage.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚡</span>
+            Claude Codeの使い方
+        </a>
+        
+        <a href="03-prompting.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">💬</span>
+            プロンプト工学
+        </a>
+        
+        <a href="04-knowledge.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">📚</span>
+            知識管理
+        </a>
+        
+        <a href="05-automation.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚙️</span>
+            自動化と拡張
+        </a>
+        
+        <a href="06-security.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🔒</span>
+            安全な使い方
+        </a>
+        
+        <a href="ref-commands.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⌨️</span>
+            コマンドリファレンス
+        </a>
+        
+        <a href="ref-troubleshoot.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🔧</span>
+            トラブルシューティング
+        </a>
+        
+        <a href="ref-prompts.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">💬</span>
+            プロンプト例文集
+        </a>
+        
+        <a href="ref-glossary.html"
+           class="sidebar-link active">
+            <span class="sidebar-icon">📖</span>
+            用語集
+        </a>
+        
+    </nav>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="content">
+        <div class="chapter-nav-top">
+            
+            <a href="ref-prompts.html" class="nav-prev">← プロンプト例文集</a>
+            
+            
+        </div>
+
+        <article class="chapter-body">
+            <hr />
+<h2>title: &quot;別冊 用語集&quot;
+icon: &quot;📖&quot;</h2>
+<h1>別冊 用語集 — AI・Claude Code用語のはじめて解説</h1>
+<div class="callout callout-info"><p>専門用語を50音＋ABC順に整理。初出時に1行説明。</p></div>
+<hr />
+<h2>A</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>用語</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Agent（エージェント）</strong></td>
+<td>サブタスクを専門に処理するAI助手。メインのClaude Codeが起動する</td>
+</tr>
+<tr>
+<td><strong>API</strong></td>
+<td>Application Programming Interface。ソフトウェア同士が通信する窓口</td>
+</tr>
+<tr>
+<td><strong>APIキー</strong></td>
+<td>API利用の認証キー。流出すると他人に悪用される</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>C</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>用語</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CLAUDE.md</strong></td>
+<td>Claude Code用の設定ファイル。プロジェクトごとの指示を書く</td>
+</tr>
+<tr>
+<td><strong>Claude Code</strong></td>
+<td>Anthropic社のAIコーディングアシスタント。コードを書いてくれる</td>
+</tr>
+<tr>
+<td><strong>Context（コンテキスト）</strong></td>
+<td>現在の会話の流れ。長いほどLLMが覚える量が多く、料金も上がる</td>
+</tr>
+<tr>
+<td><strong>Context Window</strong></td>
+<td>一度に処理できるテキスト量の上限。超えると古い分から忘れる</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>F</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>用語</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Fork（フォーク）</strong></td>
+<td>既存プロジェクトをコピーして自分のものにすること</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>G</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>用語</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Git</strong></td>
+<td>ファイルの編集履歴を管理するツール。変更の記録・復元ができる</td>
+</tr>
+<tr>
+<td><strong>GitHub</strong></td>
+<td>Gitリポジトリをオンライン保存・共有できるサービス</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>H</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>用語</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hallucination（ハルシネーション）</strong></td>
+<td>AIが自信满满に嘘をつく現象。「嘘をついている」自覚がない</td>
+</tr>
+<tr>
+<td><strong>Hook（フック）</strong></td>
+<td>特定のタイミングで 자동으로動くスクリプト</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>I</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>用語</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Iteration（反復）</strong></td>
+<td>LLMが考えて→回答して→また考える の1サイクル</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>L</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>用語</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LLM</strong></td>
+<td>Large Language Model。大規模言語モデル。大量データで訓練したAI</td>
+</tr>
+<tr>
+<td><strong>Logs（ログ）</strong></td>
+<td>操作履歴の記録。什么问题が起きたか调查のに使う</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>M</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>用語</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MCP</strong></td>
+<td>Model Context Protocol。Claude Codeに外部ツールを追加する仕組み</td>
+</tr>
+<tr>
+<td><strong>Markdown</strong></td>
+<td>简易な文章フォーマット。<code>.md</code>拡張子。読みやすく書きやすい</td>
+</tr>
+<tr>
+<td><strong>Memory（メモリ）</strong></td>
+<td>セッションをまたいで覚えておく仕組み。MEMORY.mdファイルに保存</td>
+</tr>
+<tr>
+<td><strong>Model（モデル）</strong></td>
+<td>LLMの種類。Opus/Sonnet/Haikuなど、性能とコストが異なる</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>P</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>用語</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Permission（権限）</strong></td>
+<td>Claude Codeに操作を許可するかどうかの確認</td>
+</tr>
+<tr>
+<td><strong>PreToolUse Hook</strong></td>
+<td>ツール（コマンド）実行前に走るチェック処理</td>
+</tr>
+<tr>
+<td><strong>Prompt（プロンプト）</strong></td>
+<td>LLMへの指示文。「何をさせてほしいか」を伝える文章</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>R</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>用語</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repo（リポジトリ）</strong></td>
+<td>Gitで管理されたプロジェクトの保存場所</td>
+</tr>
+<tr>
+<td><strong>Rollback（ロールバック）</strong></td>
+<td>変更を巻き戻して以前の状態に戻すこと</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>S</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>用語</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Session（セッション）</strong></td>
+<td>会話の単位。開始から終了までが一つのセッション</td>
+</tr>
+<tr>
+<td><strong>Settings.json</strong></td>
+<td>Claude Codeの設定ファイル。モデル・ツール・フックなどを指定</td>
+</tr>
+<tr>
+<td><strong>Skill（スキル）</strong></td>
+<td>再利用可能なプロンプトテンプレート。特定の状況で自动起動</td>
+</tr>
+<tr>
+<td><strong>SSOT</strong></td>
+<td>Single Source of Truth。情報の唯一の正しい出所</td>
+</tr>
+<tr>
+<td><strong>System Prompt</strong></td>
+<td>LLMの动作を決める基本指示。CLAUDE.mdの内容</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>T</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>用語</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Token（トークン）</strong></td>
+<td>テキストの分割単位。約1文字≒1トークン。LLMへの入出力はこの単位で計費</td>
+</tr>
+<tr>
+<td><strong>Tool（ツール）</strong></td>
+<td>Claude Codeができる操作（ファイル読み書き、シェル実行など）</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>W</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>用語</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>WSL2</strong></td>
+<td>Windows Subsystem for Linux 2。Windows上でLinuxを動かす仕組み</td>
+</tr>
+<tr>
+<td><strong>Webhook</strong></td>
+<td>あるサービスの出来后、別のサービスに自動通知する仕組み</td>
+</tr>
+</tbody>
+</table></div>
+
+        </article>
+
+        <nav class="chapter-nav-bottom">
+            
+            <a href="ref-prompts.html" class="nav-card prev">
+                <span class="nav-label">← 前の章</span>
+                <span class="nav-title">💬 プロンプト例文集</span>
+            </a>
+            
+            
+        </nav>
+    </main>
+
+    <script src="../assets/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+            themeVariables: { fontSize: '14px' }
+        });
+    </script>
+</body>
+</html>

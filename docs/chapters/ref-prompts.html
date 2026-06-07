@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プロンプト例文集 — AI×Claude Code 教科書</title>
+    <meta name="description" content="AI×Claude Code 教科書 プロンプト例文集の解説 — 高校生向けAIコーディング入門">
+    <meta property="og:title" content="プロンプト例文集 — AI×Claude Code 教科書">
+    <meta property="og:description" content="AI×Claude Code 教科書 プロンプト例文集の解説">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://fukukei23.github.io/claude-code-textbook/chapters/ref-prompts.html">
+    <meta property="og:image" content="https://fukukei23.github.io/claude-code-textbook/assets/ogp.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <button class="menu-toggle" aria-label="メニュー" id="menuToggle">
+            <span></span><span></span><span></span>
+        </button>
+        <a href="../index.html" class="site-title">📚 AI×Claude Code 教科書</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="テーマ切替">
+            <span class="icon-light">☀️</span>
+            <span class="icon-dark">🌙</span>
+        </button>
+    </header>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html">🏠 ホーム</a>
+        </div>
+        
+        <a href="00-ai-basics.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🤖</span>
+            AIの基礎
+        </a>
+        
+        <a href="01-setup.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🏗️</span>
+            環境構築
+        </a>
+        
+        <a href="02-usage.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚡</span>
+            Claude Codeの使い方
+        </a>
+        
+        <a href="03-prompting.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">💬</span>
+            プロンプト工学
+        </a>
+        
+        <a href="04-knowledge.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">📚</span>
+            知識管理
+        </a>
+        
+        <a href="05-automation.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚙️</span>
+            自動化と拡張
+        </a>
+        
+        <a href="06-security.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🔒</span>
+            安全な使い方
+        </a>
+        
+        <a href="ref-commands.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⌨️</span>
+            コマンドリファレンス
+        </a>
+        
+        <a href="ref-troubleshoot.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🔧</span>
+            トラブルシューティング
+        </a>
+        
+        <a href="ref-prompts.html"
+           class="sidebar-link active">
+            <span class="sidebar-icon">💬</span>
+            プロンプト例文集
+        </a>
+        
+        <a href="ref-glossary.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">📖</span>
+            用語集
+        </a>
+        
+    </nav>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="content">
+        <div class="chapter-nav-top">
+            
+            <a href="ref-troubleshoot.html" class="nav-prev">← トラブルシューティング</a>
+            
+            
+            <a href="ref-glossary.html" class="nav-next">用語集 →</a>
+            
+        </div>
+
+        <article class="chapter-body">
+            <hr />
+<h2>title: &quot;別冊 プロンプト例文集&quot;
+icon: &quot;💬&quot;</h2>
+<h1>別冊 プロンプト例文集 — すぐ使えるテンプレート20選</h1>
+<div class="callout callout-info"><p>コピペで使える定番プロンプト。状況に合わせてカスタマイズして。</p></div>
+<hr />
+<h2>コード作成系</h2>
+<h3>1. 新規ファイル作成</h3>
+<pre><code>このプロジェクトの構成教えて。次に todo-app ディレクトリに以下のファイルを作成して：
+- index.html
+- style.css
+- app.js
+</code></pre>
+<h3>2. 関数実装</h3>
+<pre><code>functions.py に `calculate_discount(price, rate)` 関数を追加して。
+- price: 金額（整数）
+- rate: 割引率（0.0〜1.0）
+- 戻り値: 割引後の金額
+</code></pre>
+<h3>3. バグ修正</h3>
+<pre><code>このコードを実行すると `TypeError: Cannot read property 'map' of undefined` が出る。
+どこが問題か教えて。
+
+```python
+# コード
+data = get_data()
+results = data.items.map(lambda x: x * 2)
+</code></pre>
+<pre><code>
+---
+
+## コード理解系
+
+### 4. コード解説
+</code></pre>
+<p>このコード、何をやっているか1行ずつ説明して：</p>
+<pre><code class="language-python">with open('data.csv', 'r') as f:
+    reader = csv.DictReader(f)
+    rows = [dict(row) for row in reader]
+</code></pre>
+<pre><code>
+### 5. 処理の流れを可視化
+</code></pre>
+<p>このスクリプトの処理の流れを日本語で説明して。特に外部APIとのやり取り部分を重点的に。</p>
+<pre><code>
+---
+
+## リファクタリング系
+
+### 6. 可読性改善
+</code></pre>
+<p>このコードをを読んで、変数名をわかりやすくリファクタリングして。
+ただし動作は変えないで。</p>
+<pre><code>
+### 7. パフォーマンス改善
+</code></pre>
+<p>この関数を10万回呼び出すと遅い。高速化する案を教えて。</p>
+<pre><code>
+---
+
+## テスト系
+
+### 8. テスト作成
+</code></pre>
+<p>main.py の <code>add(a, b)</code> 関数に対してpytestでテスト書いて。
+正常系・異常系・境界値をカバーして。</p>
+<pre><code>
+### 9. バグ再現テスト
+</code></pre>
+<p>先のバグに対して「バグがある時に失敗、バグがない時に成功」するテストを追加して。</p>
+<pre><code>
+---
+
+## ドキュメント系
+
+### 10. README作成
+</code></pre>
+<p>このプロジェクトのREADME.mdを作成して。</p>
+<ul>
+<li>概要</li>
+<li>インストール方法</li>
+<li>使い方</li>
+<li>ライセンス</li>
+</ul>
+<pre><code>
+### 11. ドキュメント追加
+</code></pre>
+<p><code>src/</code> 配下のファイルにdocstring（説明コメント）を追加して。
+形式は Google Style で。</p>
+<pre><code>
+---
+
+## 質問系
+
+### 12. 概念質問
+</code></pre>
+<p>「コンテキストウィンドウ」って何？200Kトークンってどれくらいの量？</p>
+<pre><code>
+### 13. 比較質問
+</code></pre>
+<p>Pythonで「リスト内包表記」と「forループ」、パフォーマンス違う？</p>
+<pre><code>
+---
+
+## デバッグ系
+
+### 14. エラー調査
+</code></pre>
+<p>このエラーメッセージの原因と直し方教えて：</p>
+<p>File &quot;app.py&quot;, line 15, in <module>
+import missing_module
+ModuleNotFoundError: No module named 'missing_module'</p>
+<pre><code>
+### 15. 動作確認
+</code></pre>
+<p>この変更を適用した後、以下の3パターンを手でテストして結果を教えて：</p>
+<ol>
+<li>正常系（期待通り動く入力）</li>
+<li>異常系（無効な入力）</li>
+<li>境界値（最大値・最小値）</li>
+</ol>
+<pre><code>
+---
+
+## Git系
+
+### 16. コミットメッセージ作成
+</code></pre>
+<p>今の変更内容を確認して、適切なコミットメッセージを生成して。</p>
+<pre><code>
+### 17. 変更確認
+</code></pre>
+<p>最後にcommitしてからの変更を確認して。特に src/ ディレクトリ重点的に。</p>
+<pre><code>
+---
+
+## プロジェクト系
+
+### 18. プロジェクト構成確認
+</code></pre>
+<p>現在のプロジェクト構成教えて。重点的に：</p>
+<ul>
+<li>どの言語/フレームワーク？</li>
+<li>主要なファイルは？</li>
+<li>設定ファイルはどこ？</li>
+</ul>
+<pre><code>
+### 19. TODOリスト生成
+</code></pre>
+<p>このプロジェクトの残タスクをリストアップして。コードを読み取ってTODO/FIXMEコメントも探して。</p>
+<pre><code>
+---
+
+## 便利ワンライン
+
+| 用途 | プロンプト |
+|---|---|
+| 短くして | 「3行以内で」 |
+| 日本語で | 「説明はすべて日本語で」 |
+| 急いで | 「高速モードで、簡易版でいいから」 |
+| 教えて | 「なぜこうなっているか説明して」 |
+| 検証して | 「このコードの動作を確認して」 |
+| 比較して | 「AとBの長所・短所教えて」 |
+
+---
+
+## カスタマイズのコツ
+
+</code></pre>
+<p>┌─────────────────────────────────────────────┐
+│  例文を自分のものに                            │
+│                                              │
+│  1. ファイル名を実際のものに置き換える         │
+│  2. 具体的な数値を自分のケースに合わせる        │
+│  3. 「〜して」の後に具体的な条件を足す         │
+│  4. 期待する出力形式を指定する                 │
+└─────────────────────────────────────────────┘</p>
+<pre><code></code></pre>
+
+        </article>
+
+        <nav class="chapter-nav-bottom">
+            
+            <a href="ref-troubleshoot.html" class="nav-card prev">
+                <span class="nav-label">← 前の章</span>
+                <span class="nav-title">🔧 トラブルシューティング</span>
+            </a>
+            
+            
+            <a href="ref-glossary.html" class="nav-card next">
+                <span class="nav-label">次の章 →</span>
+                <span class="nav-title">📖 用語集</span>
+            </a>
+            
+        </nav>
+    </main>
+
+    <script src="../assets/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+            themeVariables: { fontSize: '14px' }
+        });
+    </script>
+</body>
+</html>

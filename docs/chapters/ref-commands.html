@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コマンドリファレンス — AI×Claude Code 教科書</title>
+    <meta name="description" content="AI×Claude Code 教科書 コマンドリファレンスの解説 — 高校生向けAIコーディング入門">
+    <meta property="og:title" content="コマンドリファレンス — AI×Claude Code 教科書">
+    <meta property="og:description" content="AI×Claude Code 教科書 コマンドリファレンスの解説">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://fukukei23.github.io/claude-code-textbook/chapters/ref-commands.html">
+    <meta property="og:image" content="https://fukukei23.github.io/claude-code-textbook/assets/ogp.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <button class="menu-toggle" aria-label="メニュー" id="menuToggle">
+            <span></span><span></span><span></span>
+        </button>
+        <a href="../index.html" class="site-title">📚 AI×Claude Code 教科書</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="テーマ切替">
+            <span class="icon-light">☀️</span>
+            <span class="icon-dark">🌙</span>
+        </button>
+    </header>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html">🏠 ホーム</a>
+        </div>
+        
+        <a href="00-ai-basics.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🤖</span>
+            AIの基礎
+        </a>
+        
+        <a href="01-setup.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🏗️</span>
+            環境構築
+        </a>
+        
+        <a href="02-usage.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚡</span>
+            Claude Codeの使い方
+        </a>
+        
+        <a href="03-prompting.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">💬</span>
+            プロンプト工学
+        </a>
+        
+        <a href="04-knowledge.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">📚</span>
+            知識管理
+        </a>
+        
+        <a href="05-automation.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚙️</span>
+            自動化と拡張
+        </a>
+        
+        <a href="06-security.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🔒</span>
+            安全な使い方
+        </a>
+        
+        <a href="ref-commands.html"
+           class="sidebar-link active">
+            <span class="sidebar-icon">⌨️</span>
+            コマンドリファレンス
+        </a>
+        
+        <a href="ref-troubleshoot.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🔧</span>
+            トラブルシューティング
+        </a>
+        
+        <a href="ref-prompts.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">💬</span>
+            プロンプト例文集
+        </a>
+        
+        <a href="ref-glossary.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">📖</span>
+            用語集
+        </a>
+        
+    </nav>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="content">
+        <div class="chapter-nav-top">
+            
+            <a href="06-security.html" class="nav-prev">← 安全な使い方</a>
+            
+            
+            <a href="ref-troubleshoot.html" class="nav-next">トラブルシューティング →</a>
+            
+        </div>
+
+        <article class="chapter-body">
+            <hr />
+<h2>title: &quot;別冊 コマンドリファレンス&quot;
+icon: &quot;⌨️&quot;</h2>
+<h1>別冊 コマンドリファレンス — よく使うコマンド一覧</h1>
+<div class="callout callout-info"><p>Claude Codeで使うコマンドを一覧化。必要な時にすぐ引けるように。</p></div>
+<hr />
+<h2>Claude Code CLI コマンド</h2>
+<h3>起動・終了</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>claude</code></td>
+<td>対話モードで起動</td>
+</tr>
+<tr>
+<td><code>claude &quot;質問内容&quot;</code></td>
+<td>質問を1回だけ実行して終了</td>
+</tr>
+<tr>
+<td><code>claude update</code></td>
+<td>Claude Codeを最新版に更新</td>
+</tr>
+<tr>
+<td><code>claude --version</code></td>
+<td>バージョン確認</td>
+</tr>
+<tr>
+<td><code>/exit</code></td>
+<td>セッション終了（対話モード内）</td>
+</tr>
+</tbody>
+</table></div>
+<h3>セッション内スラッシュコマンド</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/help</code></td>
+<td>ヘルプ表示</td>
+</tr>
+<tr>
+<td><code>/clear</code></td>
+<td>会話履歴をクリア（コンテキストリセット）</td>
+</tr>
+<tr>
+<td><code>/compact</code></td>
+<td>会話を要約してコンテキストを節約</td>
+</tr>
+<tr>
+<td><code>/model</code></td>
+<td>使用モデルを変更</td>
+</tr>
+<tr>
+<td><code>/context</code></td>
+<td>現在のコンテキスト使用量を表示</td>
+</tr>
+<tr>
+<td><code>/cost</code></td>
+<td>現在のセッションの料金を表示</td>
+</tr>
+<tr>
+<td><code>/permissions</code></td>
+<td>権限設定を確認</td>
+</tr>
+<tr>
+<td><code>/memory</code></td>
+<td>メモリファイルを確認</td>
+</tr>
+<tr>
+<td><code>/tasks</code></td>
+<td>バックグラウンドタスク一覧</td>
+</tr>
+<tr>
+<td><code>/review</code></td>
+<td>コードレビューを実行</td>
+</tr>
+<tr>
+<td><code>/fast</code></td>
+<td>高速モード切替</td>
+</tr>
+<tr>
+<td><code>/undo</code></td>
+<td>直前のファイル変更を取り消し</td>
+</tr>
+</tbody>
+</table></div>
+<h3>起動オプション</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>オプション</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--model NAME</code></td>
+<td>モデルを指定して起動</td>
+</tr>
+<tr>
+<td><code>--allowedTools</code></td>
+<td>使用可能なツールを制限</td>
+</tr>
+<tr>
+<td><code>--print</code></td>
+<td>出力のみ表示（パイプ用）</td>
+</tr>
+<tr>
+<td><code>--output-format json</code></td>
+<td>JSON形式で出力</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>Git基本コマンド</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git init</code></td>
+<td>新規リポジトリ作成</td>
+</tr>
+<tr>
+<td><code>git add -A</code></td>
+<td>全変更をステージング</td>
+</tr>
+<tr>
+<td><code>git commit -m &quot;メッセージ&quot;</code></td>
+<td>コミット</td>
+</tr>
+<tr>
+<td><code>git push</code></td>
+<td>リモートにプッシュ</td>
+</tr>
+<tr>
+<td><code>git pull</code></td>
+<td>リモートから取得</td>
+</tr>
+<tr>
+<td><code>git status</code></td>
+<td>変更状況確認</td>
+</tr>
+<tr>
+<td><code>git log --oneline -10</code></td>
+<td>直近10件のコミット表示</td>
+</tr>
+<tr>
+<td><code>git diff</code></td>
+<td>変更差分確認</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>WSL2 コマンド</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>wsl --install</code></td>
+<td>WSL2インストール（PowerShell）</td>
+</tr>
+<tr>
+<td><code>wsl --list --verbose</code></td>
+<td>インストール済みディストリビューション一覧</td>
+</tr>
+<tr>
+<td><code>wsl --set-default Ubuntu</code></td>
+<td>デフォルトをUbuntuに設定</td>
+</tr>
+<tr>
+<td><code>wsl --update</code></td>
+<td>WSL2更新</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>便利なLinuxコマンド</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ls -la</code></td>
+<td>ファイル一覧（隠しファイル含む）</td>
+</tr>
+<tr>
+<td><code>cd ~/projects</code></td>
+<td>ディレクトリ移動</td>
+</tr>
+<tr>
+<td><code>mkdir -p dir/sub</code></td>
+<td>ディレクトリ作成（中間も含む）</td>
+</tr>
+<tr>
+<td><code>cat file.txt</code></td>
+<td>ファイル内容表示</td>
+</tr>
+<tr>
+<td><code>grep &quot;keyword&quot; file</code></td>
+<td>ファイル内検索</td>
+</tr>
+<tr>
+<td><code>find . -name &quot;*.py&quot;</code></td>
+<td>ファイル検索</td>
+</tr>
+<tr>
+<td><code>python3 script.py</code></td>
+<td>Pythonスクリプト実行</td>
+</tr>
+<tr>
+<td><code>npm install -g package</code></td>
+<td>Node.jsパッケージのグローバルインストール</td>
+</tr>
+</tbody>
+</table></div>
+
+        </article>
+
+        <nav class="chapter-nav-bottom">
+            
+            <a href="06-security.html" class="nav-card prev">
+                <span class="nav-label">← 前の章</span>
+                <span class="nav-title">🔒 安全な使い方</span>
+            </a>
+            
+            
+            <a href="ref-troubleshoot.html" class="nav-card next">
+                <span class="nav-label">次の章 →</span>
+                <span class="nav-title">🔧 トラブルシューティング</span>
+            </a>
+            
+        </nav>
+    </main>
+
+    <script src="../assets/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+            themeVariables: { fontSize: '14px' }
+        });
+    </script>
+</body>
+</html>

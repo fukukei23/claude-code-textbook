@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>トラブルシューティング — AI×Claude Code 教科書</title>
+    <meta name="description" content="AI×Claude Code 教科書 トラブルシューティングの解説 — 高校生向けAIコーディング入門">
+    <meta property="og:title" content="トラブルシューティング — AI×Claude Code 教科書">
+    <meta property="og:description" content="AI×Claude Code 教科書 トラブルシューティングの解説">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://fukukei23.github.io/claude-code-textbook/chapters/ref-troubleshoot.html">
+    <meta property="og:image" content="https://fukukei23.github.io/claude-code-textbook/assets/ogp.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <button class="menu-toggle" aria-label="メニュー" id="menuToggle">
+            <span></span><span></span><span></span>
+        </button>
+        <a href="../index.html" class="site-title">📚 AI×Claude Code 教科書</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="テーマ切替">
+            <span class="icon-light">☀️</span>
+            <span class="icon-dark">🌙</span>
+        </button>
+    </header>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html">🏠 ホーム</a>
+        </div>
+        
+        <a href="00-ai-basics.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🤖</span>
+            AIの基礎
+        </a>
+        
+        <a href="01-setup.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🏗️</span>
+            環境構築
+        </a>
+        
+        <a href="02-usage.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚡</span>
+            Claude Codeの使い方
+        </a>
+        
+        <a href="03-prompting.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">💬</span>
+            プロンプト工学
+        </a>
+        
+        <a href="04-knowledge.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">📚</span>
+            知識管理
+        </a>
+        
+        <a href="05-automation.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚙️</span>
+            自動化と拡張
+        </a>
+        
+        <a href="06-security.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🔒</span>
+            安全な使い方
+        </a>
+        
+        <a href="ref-commands.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⌨️</span>
+            コマンドリファレンス
+        </a>
+        
+        <a href="ref-troubleshoot.html"
+           class="sidebar-link active">
+            <span class="sidebar-icon">🔧</span>
+            トラブルシューティング
+        </a>
+        
+        <a href="ref-prompts.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">💬</span>
+            プロンプト例文集
+        </a>
+        
+        <a href="ref-glossary.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">📖</span>
+            用語集
+        </a>
+        
+    </nav>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="content">
+        <div class="chapter-nav-top">
+            
+            <a href="ref-commands.html" class="nav-prev">← コマンドリファレンス</a>
+            
+            
+            <a href="ref-prompts.html" class="nav-next">プロンプト例文集 →</a>
+            
+        </div>
+
+        <article class="chapter-body">
+            <hr />
+<h2>title: &quot;別冊 トラブルシューティング&quot;
+icon: &quot;🔧&quot;</h2>
+<h1>別冊 トラブルシューティング — よくあるエラーと直し方</h1>
+<div class="callout callout-info"><p>Claude Codeを使っていて遭遇するありがちなエラーと、その直し方。</p></div>
+<hr />
+<h2>インストール関連</h2>
+<h3>「claude: command not found」</h3>
+<pre><code class="language-bash"># 解決法1: パスを通す
+export PATH=&quot;$PATH:$(npm bin -g)&quot;
+
+# 解決法2: npmで再インストール
+npm install -g @anthropic-ai/claude-code
+
+# 解決法3: 公式インストーラー
+curl -fsSL https://claude.ai/install.sh | bash
+</code></pre>
+<h3>WSL2 が動かない</h3>
+<pre><code class="language-powershell"># PowerShellで実行
+wsl --install
+# PC再起動が必要
+</code></pre>
+<hr />
+<h2>認証関連</h2>
+<h3>「Authentication failed」</h3>
+<pre><code class="language-bash"># 認証情報をリセット
+claude auth logout
+claude auth login
+</code></pre>
+<h3>APIキーが認識されない</h3>
+<pre><code class="language-bash"># 環境変数に設定
+export ANTHROPIC_API_KEY=&quot;sk-...&quot;
+
+# または ~/.claude/settings.local.json に記載
+</code></pre>
+<hr />
+<h2>実行関連</h2>
+<h3>「Permission denied」で実行できない</h3>
+<ul>
+<li>Claude Codeが確認を求めている。<code>y</code> で許可して</li>
+<li>危険なコマンドは手動で <code>y</code> を入力すること</li>
+</ul>
+<h3>「File not found」でファイルが見つからない</h3>
+<pre><code class="language-bash"># 現在のディレクトリを確認
+pwd
+
+# ファイル是否存在を確認
+ls ファイル名
+
+# フルパスで指定
+claude &quot;Read 絶対パス/ファイル名&quot;
+</code></pre>
+<h3>日本語が文字化けする</h3>
+<pre><code class="language-bash"># UTF-8設定を確認
+export LANG=en_US.UTF-8
+</code></pre>
+<hr />
+<h2>パフォーマンス関連</h2>
+<h3>レスポンスが遅い / 止まる</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>原因</th>
+<th>対策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>長いセッション</td>
+<td><code>/compact</code> で圧縮</td>
+</tr>
+<tr>
+<td>MCPサーバーが多すぎる</td>
+<td>使わないサーバーを切る</td>
+</tr>
+<tr>
+<td>ネットワーク遅延</td>
+<td>VPN/プロキシ確認</td>
+</tr>
+</tbody>
+</table></div>
+<h3>コンテキスト上限に達した</h3>
+<pre><code>/compact
+</code></pre>
+<p>で会話コストを削減。解決しない場合は <code>/clear</code> で新規セッション開始。</p>
+<hr />
+<h2>Claude Code CLI固有</h2>
+<h3>「WSL path」エラー</h3>
+<p>Windows側で実行している可能性。WSL2内から起動し直す。</p>
+<pre><code class="language-bash"># WSL2内から起動
+claude
+</code></pre>
+<h3>「Session locked」</h3>
+<p>別のセッションが実行中。完了を待つ、または終了させる。</p>
+<hr />
+<h2>覚えておきたいこと</h2>
+<pre><code>┌──────────────────────────────────────┐
+│  エラーが出たら：                        │
+│                                      │
+│  1. エラーメッセージを全文読む           │
+│  2. 問題の一行前で「？」を入力してみる    │
+│  3. `/help` で公式ドキュメント参照       │
+│  4. それでも解決しない → 別セッションで   │
+│     問題を再現して質問する               │
+└──────────────────────────────────────┘
+</code></pre>
+
+        </article>
+
+        <nav class="chapter-nav-bottom">
+            
+            <a href="ref-commands.html" class="nav-card prev">
+                <span class="nav-label">← 前の章</span>
+                <span class="nav-title">⌨️ コマンドリファレンス</span>
+            </a>
+            
+            
+            <a href="ref-prompts.html" class="nav-card next">
+                <span class="nav-label">次の章 →</span>
+                <span class="nav-title">💬 プロンプト例文集</span>
+            </a>
+            
+        </nav>
+    </main>
+
+    <script src="../assets/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+            themeVariables: { fontSize: '14px' }
+        });
+    </script>
+</body>
+</html>

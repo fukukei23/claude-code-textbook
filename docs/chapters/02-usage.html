@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Codeの使い方 — AI×Claude Code 教科書</title>
+    <meta name="description" content="AI×Claude Code 教科書 Claude Codeの使い方の解説 — 高校生向けAIコーディング入門">
+    <meta property="og:title" content="Claude Codeの使い方 — AI×Claude Code 教科書">
+    <meta property="og:description" content="AI×Claude Code 教科書 Claude Codeの使い方の解説">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://fukukei23.github.io/claude-code-textbook/chapters/02-usage.html">
+    <meta property="og:image" content="https://fukukei23.github.io/claude-code-textbook/assets/ogp.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <button class="menu-toggle" aria-label="メニュー" id="menuToggle">
+            <span></span><span></span><span></span>
+        </button>
+        <a href="../index.html" class="site-title">📚 AI×Claude Code 教科書</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="テーマ切替">
+            <span class="icon-light">☀️</span>
+            <span class="icon-dark">🌙</span>
+        </button>
+    </header>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html">🏠 ホーム</a>
+        </div>
+        
+        <a href="00-ai-basics.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🤖</span>
+            AIの基礎
+        </a>
+        
+        <a href="01-setup.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🏗️</span>
+            環境構築
+        </a>
+        
+        <a href="02-usage.html"
+           class="sidebar-link active">
+            <span class="sidebar-icon">⚡</span>
+            Claude Codeの使い方
+        </a>
+        
+        <a href="03-prompting.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">💬</span>
+            プロンプト工学
+        </a>
+        
+        <a href="04-knowledge.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">📚</span>
+            知識管理
+        </a>
+        
+        <a href="05-automation.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚙️</span>
+            自動化と拡張
+        </a>
+        
+        <a href="06-security.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🔒</span>
+            安全な使い方
+        </a>
+        
+        <a href="ref-commands.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⌨️</span>
+            コマンドリファレンス
+        </a>
+        
+        <a href="ref-troubleshoot.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🔧</span>
+            トラブルシューティング
+        </a>
+        
+        <a href="ref-prompts.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">💬</span>
+            プロンプト例文集
+        </a>
+        
+        <a href="ref-glossary.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">📖</span>
+            用語集
+        </a>
+        
+    </nav>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="content">
+        <div class="chapter-nav-top">
+            
+            <a href="01-setup.html" class="nav-prev">← 環境構築</a>
+            
+            
+            <a href="03-prompting.html" class="nav-next">プロンプト工学 →</a>
+            
+        </div>
+
+        <article class="chapter-body">
+            <hr />
+<h2>title: &quot;Claude Code使い方&quot;
+icon: &quot;terminal&quot;</h2>
+<h1>Claude Code使い方</h1>
+<p>Claude Codeは、ターミナル（コマンドプロンプト）の中で動くAIアシスタントです。従来のブラウザ上のAI不同的是、<strong>実際のファイルを編集したり、コマンドを実行したり、Git操作もできます</strong>。この章では、Claude Codeの基本的な使い方と、主要な概念をゼロから説明します。</p>
+<hr />
+<h2>1. Claude Codeのはじまり方</h2>
+<h3>起動コマンド</h3>
+<p>ターミナルで以下のコマンドを入力します。</p>
+<pre><code class="language-bash">$ claude
+</code></pre>
+<p>そうすると、対話モードが始まり、以下のような画面が表示されます。</p>
+<pre><code class="language-bash">$ claude
+Building context from recent files...
+
+
+
+ Claude CodeではじめるAIコーディング
+
+何かお手伝いできることはありますか？
+&gt;
+</code></pre>
+<p>「<code>&gt;</code>」のカーソルにそのまま日本語や英語の質問・指示を入力して、Enterで送信します。終了するには <code>/exit</code> と入力します。</p>
+<h3>終了のしかた</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/exit</code> と入力</td>
+<td>安全に終了</td>
+</tr>
+<tr>
+<td><code>Ctrl+C</code> を押す</td>
+<td>強制終了</td>
+</tr>
+</tbody>
+</table></div>
+<p>終了した後、同じターミナルで再度 <code>claude</code> と打てば、いつでも新しいセッションを始められます。</p>
+<hr />
+<h2>2. 許可（Permission）システム</h2>
+<p>Claude Codeには「許可（Permission）」システムがあります。Claudeは<strong>危険な操作を実行する前に、必ず確認を求めてきます</strong>。これは、AIが誤った命令を解釈して取り返しのつかない操作をするのを防ぐための安全装置です。</p>
+<h3>許可を求める場面の例</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>なぜ確認されるか</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>rm -rf /</code></td>
+<td>ファイル完全削除。取り消せない</td>
+</tr>
+<tr>
+<td><code>DROP DATABASE</code></td>
+<td>データベースの全データが消える</td>
+</tr>
+<tr>
+<td>大量のファイル上書き</td>
+<td>作業中の内容が失われる</td>
+</tr>
+<tr>
+<td>外部ネットワークへの接続</td>
+<td>セキュリティリスク</td>
+</tr>
+</tbody>
+</table></div>
+<h3>許可の流れ（フローチャート）</h3>
+<pre><code class="language-mermaid">flowchart TD
+    A[&quot;あなたからの指示&lt;br&gt;「全ファイルを削除して」&quot;] --&gt; B{Claude Code}
+    B --&gt; C{危険な操作か?}
+    C --&gt;|はい| D[&quot;許可を求める&lt;br&gt;「本当に実行しますか?」&quot;]
+    D --&gt; E{あなたが&lt;br&gt;&quot;許可する&quot;と回答}
+    E --&gt; F[&quot;実行&quot;]
+    C --&gt;|いいえ| G[&quot;そのまま実行&quot;]
+    E --&gt; H[&quot;拒否して別の&lt;br&gt;方法を提案&quot;]
+    style D fill:#fff3cd,stroke:#ffc107
+    style F fill:#d4edda,stroke:#28a745
+    style H fill:#f8d7da,stroke:#dc3545
+</code></pre>
+<p>つまり、Claude Codeは**「可能性がある!」と思った操作は一旦止まって、人間が確認する」**設計になっています。「許可する」と答えない限り、危険な操作は実行されません。</p>
+<h3>許可を预先に与えるには</h3>
+<p><code>~/.claude/settings.json</code> に許可ルールを書くことで、よく使う安全な操作を预先に許可できます。ただし、<code>rm -rf</code> のような高リスク操作は許可ルールの対象外となり、常に確認求められます。</p>
+<pre><code class="language-json">{
+  &quot;permissions&quot;: {
+    &quot;allow&quot;: [
+      &quot;read all files&quot;,
+      &quot;run git status&quot;,
+      &quot;run npm install&quot;
+    ]
+  }
+}
+</code></pre>
+<p>ただし、<code>allow all</code>（すべて許可）は絶対に設定しないでください。AIが误った判断をした场合に、手遅れになる可能性があります。</p>
+<hr />
+<h2>3. 基本的なスラッシュコマンド</h2>
+<p>Claude Codeでは <code>/</code> で始まるコマンドを使って動作を制御します。利用可能なコマンドは以下の通りです。</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>コマンド</th>
+<th>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/help</code></td>
+<td>利用可能なコマンドの一覧を表示</td>
+</tr>
+<tr>
+<td><code>/model</code></td>
+<td>AIモデルを変更する（例: Opus, Sonnet, Haiku）</td>
+</tr>
+<tr>
+<td><code>/clear</code></td>
+<td>画面をクリアする（コンテキストは維持）</td>
+</tr>
+<tr>
+<td><code>/compact</code></td>
+<td>長いセッションのコンテキストを压缩して整理する</td>
+</tr>
+<tr>
+<td><code>/exit</code></td>
+<td>Claude Codeを終了する</td>
+</tr>
+</tbody>
+</table></div>
+<h3><code>/model</code> でモデルを変更する</h3>
+<pre><code>&gt; /model
+変更するモデルを選択:
+1. Claude Opus 4 (最も高性能・複雑な推論向き)
+2. Claude Sonnet 4 (バランス型・日常使用に最適)
+3. Claude Haiku 3 (高速・軽量・シンプルタスク向き)
+</code></pre>
+<p>Opus は複雑な分析・コード生成に向き、Sonnet はバランスの取れた選択肢、Haiku は素早い返答が必要なときに便利です。</p>
+<h3><code>/compact</code> でコンテキストを整理する</h3>
+<p>長いセッションで「Claudeの回答がおかしくなってきた」「以前の情報を忘れてきた」と感じたときに <code>/compact</code> を使います。Claudeが過去の会話を圧縮して整理し、新たな議論のための空間を作ります。</p>
+<h3><code>/compact</code> が効果的なタイミング</h3>
+<ul>
+<li>セッションを長く使い続けて、Claudeの回答品質が下がってきたと感じるとき</li>
+<li>多くのファイルを編集した後、Claudeが前の編集内容を忘れているようなとき</li>
+<li>コンテキストが溢れてエラーが出るとき</li>
+</ul>
+<p><code>/compact</code> を実行すると、Claudeはそれまでの会話内容を要約し、重要な情報だけを保持します。作業の流れはそのまま引き継がれるので、会話の途中でも安心して使えます。</p>
+<hr />
+<h2>4. 「セッション」という概念</h2>
+<p>Claude Codeでは、<strong>1回の会話 = 1つのセッション</strong>です。各セッションは独自の「コンテキスト」（文脈）を持ちます。</p>
+<pre><code>┌─────────────────────────────────────────┐
+│セッション A                              │
+│  「PythonでWebアプリを作る」                │
+│  → auth.py, database.py などの情報保持     │
+│  →ユーザーの好みやプロジェクト構成の記憶 │
+└─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────┐
+│  セッション B                              │
+│  「Reactのコンポーネントが動かない」        │
+│  → App.jsx, styles.css などの情報保持 │
+│  → 別のプロジェクトの文脈は保持しない │
+└─────────────────────────────────────────┘
+</code></pre>
+<p><strong>セッションごとにコンテキストは独立</strong>しています。セッションAで学んだことはセッションBには反映されません。これは意図的な設計で、プロジェクトごとに话题を分开でき、雑多な情報が混ざるのを防げます。</p>
+<h3>セッションの引き継ぎ（handover）</h3>
+<p>新しいセッションを始めるときに <code>/new-session</code> を使う（または新しいトピック话题を切り离ると）と、Claudeは「前回の続き」についての情報を聞いてきます。ここで概要を渡すことで、新しいClaudeが前回の文脈を理解して継続できます。</p>
+<pre><code>&gt; /new-session
+前回のプロジェクトについて教えてください。
+（ auth.py のログイン機能を作っていました）
+</code></pre>
+<h3>コンテキストの限界に注意</h3>
+<p>セッションには「コンテキスト上限」というものがあります。一度に覚えておける情報量には限りがあるため、非常に長いセッションでは以下のような症状が出ることがあります。</p>
+<ul>
+<li>以前の指示を忘れてしまう</li>
+<li>同じ質問を繰り返す</li>
+<li>回答の品質が低下する</li>
+</ul>
+<p>こうした場合は <code>/compact</code> で整理するか、新しいセッションを始めて引き継ぐのが效果的です。一つのセッションで一日中作業するのではなく、作業の区切りでセッションを切り替えることをお勧めします。</p>
+<hr />
+<h2>5. スキル（Skills）とは</h2>
+<p>スキルは、特定のタスクに備えて自動化された<strong>プロンプトテンプレート</strong>です。あなたが「〜について調査して」「〜を作って」と言ったとき、関連するスキルが自動的に激活します。</p>
+<pre><code>あなたの入力: 「Deep Researchで○○について調査して」
+
+         ↓ スキルが自動検出
+┌──────────────────────────────┐
+│  deep-research スキル         │
+│  →ウェブリサーチを実行 │
+│  → 複数のソースから情報を集約   │
+│  → 引用付きの調査レポート生成 │
+└──────────────────────────────┘
+</code></pre>
+<h3>主要なスキルの例</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>スキル</th>
+<th>何をするか</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/code-review</code></td>
+<td>変更差分をチェックしてバグ・改善点を指摘</td>
+</tr>
+<tr>
+<td><code>/deep-research</code></td>
+<td>WEB上の情報を調査してレポートを生成</td>
+</tr>
+<tr>
+<td><code>/skill-creator</code></td>
+<td>新しいスキルを自作して拡張</td>
+</tr>
+<tr>
+<td><code>/html-guide</code></td>
+<td>インタラクティブなHTMLヘルプページを生成</td>
+</tr>
+<tr>
+<td><code>/new-session</code></td>
+<td>セッションを切り替えて引き継ぎプロンプトを生成</td>
+</tr>
+</tbody>
+</table></div>
+<p>スキルは標準で备わっているものもあれば、あなたが自作できるものもあります。「よくやる作业」をスキルとして登録しておくと、同じ指示を简単 반復できて便利です。</p>
+<h3>スキルが激活する流れ</h3>
+<p>スキルは「自動激活」と「手動激活」の2通りがあります。手動激活は <code>/skill-name</code> のように直接コマンドを入力する方法です。自動激活は、あなたの入力文をClaudeが分析し、関連するスキルを自動的に選択して実行します。</p>
+<pre><code class="language-mermaid">flowchart TD
+    A[&quot;ユーザーの入力&quot;] --&gt; B{&quot;スキル相关?&quot;}
+    B --&gt;|はい| C[&quot;スキルを自動激活&quot;]
+    C --&gt; D[&quot;スキル固有の処理を実行&quot;]
+    D --&gt; E[&quot;結果をユーザーに返す&quot;]
+    B --&gt;|いいえ| F[&quot;通常の会話として処理&quot;]
+    style C fill:#e3f2fd,stroke:#2196f3
+    style F fill:#f5f5f5,stroke:#999
+</code></pre>
+<hr />
+<h2>6. MCPサーバー（拡張機能）</h2>
+<p>MCP（Model Context Protocol）サーバーは、Claudeの機能を拡張する「プラグイン」です。デフォルトのClaudeではできないことも、MCPサーバーを追加すればできるようになります。例えば、ブラウザ上のウェブページを操作したり、GitHubのIssueを作成したり、最新のライブラリのドキュメントを検索したりできます。</p>
+<h3>MCPサーバーの構成図</h3>
+<pre><code>┌─────────────────────────────────────────────┐
+│           Claude Code 本体                    │
+│  (ファイル編集・コマンド実行・思考・推論)      │
+└──────────────┬───────────────────────────────┘
+               │  MCPプロトコル（標準化されたつなぎ口）
+ ┌───────┴───────┐
+       ↓ ↓       ↓
+┌──────────┐ ┌──────────┐ ┌──────────┐
+│ GitHub   │ │ Brave │ │ Playwright│
+│ MCP      │ │ Search   │ │ MCP       │
+│ │ │          │ │ │
+│ リポジトリ│ │ WEB検索   │ │ ブラウザ │
+│ 操作 │ │ニュース  │ │自动化    │
+│ Issue/PR │ │ 画像検索 │ │ 操作 │
+└──────────┘ └──────────┘ └──────────┘
+</code></pre>
+<h3>各MCPサーバーのできること</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>MCPサーバー</th>
+<th>何ができるか</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>brave-search</code></td>
+<td>WEB検索・ニュース取得・画像検索</td>
+</tr>
+<tr>
+<td><code>github</code></td>
+<td>Issue作成/PR作成・コード検索・リポジトリ操作</td>
+</tr>
+<tr>
+<td><code>playwright</code></td>
+<td>ブラウザの自动化操作（クリック・入力・screenshots）</td>
+</tr>
+<tr>
+<td><code>context7</code></td>
+<td>ライブラリの最新ドキュメントを即时取得</td>
+</tr>
+<tr>
+<td><code>discord</code></td>
+<td>Discordチャンネルへの通知・メッセージ取得</td>
+</tr>
+</tbody>
+</table></div>
+<p>MCPサーバーは <code>~/.claude/settings.json</code> で設定します。具体的な設定方法は『設定とカスタマイズ』の章で説明します。</p>
+<h3>MCPの考え方</h3>
+<p>MCPは「標準化されたつなぎ口」です。つまり、Claude Code側は「MCPというルールに従ってください」というだけで済みます。新しい拡張機能を追加したいときは、そのルールに従ったサーバーを用意するだけで、Claude Code本体を変更する必要はありません。これはスマートフォンのアプリストアと同じ考え方です。</p>
+<pre><code>スマートフォンの例え:
+
+┌──────────────┐     ┌──────────────┐
+│スマートフォン  │     │ Claude Code   │
+│（本体）       │     │（本体）       │
+└──────┬───────┘     └──────┬───────┘
+       │アプリを追加          │MCPサーバーを追加
+       ↓                     ↓
+┌──────────────┐     ┌──────────────┐
+│カメラアプリ   │     │ GitHub MCP   │
+│地図アプリ     │     │ Search MCP   │
+│音楽アプリ     │     │ Playwright MCP│
+└──────────────┘     └──────────────┘
+</code></pre>
+<p>この仕組みのおかげで、Claude Codeの機能はユーザー自身が自由に拡張できます。</p>
+<hr />
+<h2>7. ChatGPTとの決定的な違い</h2>
+<p>ここまでの内容を整理すると、Claude CodeとChatGPTの最大の違いが明确になります。</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>機能</th>
+<th>ChatGPT</th>
+<th>Claude Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ファイル編集</td>
+<td>不可</td>
+<td>可能</td>
+</tr>
+<tr>
+<td>コマンド実行</td>
+<td>不可</td>
+<td>可能</td>
+</tr>
+<tr>
+<td>Git操作</td>
+<td>不可</td>
+<td>可能</td>
+</tr>
+<tr>
+<td>WEB検索</td>
+<td>一部対応</td>
+<td>MCPで расширяемая</td>
+</tr>
+<tr>
+<td>ターミナル統合</td>
+<td>なし</td>
+<td>ネイティブ統合</td>
+</tr>
+<tr>
+<td>プロジェクト単位の作業</td>
+<td>限定的</td>
+<td>完全対応</td>
+</tr>
+<tr>
+<td>許可システム</td>
+<td>なし</td>
+<td>組み込み済み</td>
+</tr>
+</tbody>
+</table></div>
+<pre><code class="language-mermaid">flowchart LR
+    subgraph ChatGPT[&quot;ChatGPT (ブラウザ)&quot;]
+        A1[&quot;会話&quot;] --&gt; A2[&quot;テキスト回答&quot;]
+    end
+    subgraph ClaudeCode[&quot;Claude Code (ターミナル)&quot;]
+        B1[&quot;会話&quot;] --&gt; B2[&quot;思考 + ツール実行&quot;]
+        B2 --&gt; B3[&quot;ファイル編集&quot;]
+        B2 --&gt; B4[&quot;コマンド実行&quot;]
+        B2 --&gt; B5[&quot;Git操作&quot;]
+        B2 --&gt; B6[&quot;MCP拡張&quot;]
+    end
+    style ChatGPT fill:#e8f5e9,stroke:#4caf50
+    style ClaudeCode fill:#e3f2fd,stroke:#2196f3
+</code></pre>
+<p><strong>Claude Codeは「话すだけ」から「実際に行う」に进化したAIツール</strong>です。ただし、その分「許可の確認」が入るなど、安全のための工夫も必要です。</p>
+<h3>使い分けの目安</h3>
+<p>ChatGPTとClaude Codeは「どちらが優れているか」ではなく、「用途が違う」と理解しましょう。文章のアイデア出しや簡単な質問にはChatGPTが便利です。しかし、実際のコードを編集したり、プロジェクト全体を管理したりする作業にはClaude Codeが圧倒的に向いています。</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>作业内容</th>
+<th>向いているツール</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>アイデア出し・文章作成</td>
+<td>ChatGPT</td>
+</tr>
+<tr>
+<td>プログラミング学習の質問</td>
+<td>どちらでも</td>
+</tr>
+<tr>
+<td>ファイルの編集・コマンド実行</td>
+<td>Claude Code</td>
+</tr>
+<tr>
+<td>プロジェクト全体の管理</td>
+<td>Claude Code</td>
+</tr>
+<tr>
+<td>Git操作・テスト実行</td>
+<td>Claude Code</td>
+</tr>
+</tbody>
+</table></div>
+<p>次の章では、こうしたClaude Codeを効果的に使うための「プロンプトの書き方」を説明します。</p>
+<hr />
+<h2>8. コマンドライン引数による起動オプション</h2>
+<p><code>claude</code> コマンドには様々な启动引数があります。用途に応じて使い分けましょう。</p>
+<p>###よく使う起動オプション</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>引数</th>
+<th>意味</th>
+<th>使用例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>claude --no-input</code></td>
+<td>自動起動せず会話モードのみ</td>
+<td>初期確認のみ済ませたいとき</td>
+</tr>
+<tr>
+<td><code>claude --print &lt;プロンプト&gt;</code></td>
+<td>単発実行して即終了</td>
+<td>スクリプト内から呼び出す</td>
+</tr>
+<tr>
+<td><code>claude --resume</code></td>
+<td>前回のセッションに再接続</td>
+<td>作業を引き継ぐとき</td>
+</tr>
+</tbody>
+</table></div>
+<h3>単発実行の實際例</h3>
+<pre><code class="language-bash"># 単発で質問して即終了
+$ claude --print &quot;PythonでHello Worldを表示するコードを見せて&quot;
+
+# ファイルを与えて分析させる
+$ claude --print &quot;このコードのバグを直して&quot; &lt; auth.py
+</code></pre>
+<p><code>--print</code> はスクリプトや自动化に活用できますが、複雑な作业には対話モードを使うのがおすすめです。</p>
+<hr />
+<h2>9. プロジェクトごとの設定ファイル</h2>
+<p>Claude Codeは <code>~/.claude/settings.json</code> で全体設定を、<code>プロジェクトルート/.claude/settings.json</code> でプロジェクト별 설정을行えます。</p>
+<h3>プロジェクト별設定の例</h3>
+<pre><code>my-project/
+├── src/
+│   └── app.py
+├── tests/
+│   └── test_app.py
+└── .claude/
+    └── settings.json   ← プロジェクトごとの設定
+</code></pre>
+<p>このプロジェクト별設定ファイルには、以下のような项目を書けます。</p>
+<ul>
+<li><strong>許可ルールのoverride</strong>: プロジェクト内でだけ許可する操作</li>
+<li><strong>利用可能なMCPサーバー</strong>: プロジェクトunikの拡張機能</li>
+<li><strong>カスタムスキルの登録</strong>: そのプロジェクト専用のスキル</li>
+</ul>
+<p>こうすることで、「このプロジェクトではこの操作だけ許可したい」といった精细な制御が可能になります。</p>
+<hr />
+<h2>10. ツール呼び出しの流れ</h2>
+<p>Claude Codeが内部でどのように動いているか、理解しておくとトラブル 대응に便利です。Claudeがファイルを編集したりコマンドを実行したりするとき、以下の流程をたどります。</p>
+<pre><code>あなた: 「auth.py のログイン関数に空文字チェックを追加して」
+
+ ↓
+┌──────────────────────────────┐
+│ 1. 理解 (Understanding)     │
+│  → プロンプトを解析           │
+│  →どのファイル?どの関数?       │
+└──────────────┬───────────────┘
+               ↓
+┌──────────────────────────────┐
+│  2. 計画 (Planning)          │
+│  → 手順を考える │
+│  → 「ファイルを読んで→修正を生成→実行」 │
+└──────────────┬───────────────┘
+               ↓
+┌──────────────────────────────┐
+│  3. ツール実行 (Tool Use)      │
+│  → Read: auth.py を読み込み      │
+│  → Edit: 空文字チェックを追加 │
+│  → Bash: テスト実行 │
+└──────────────┬───────────────┘
+               ↓
+┌──────────────────────────────┐
+│  4. 回答 (Response)           │
+│  → 何をしたかをあなたに報告 │
+│  → エラーがあれば報告 │
+└──────────────────────────────┘
+</code></pre>
+<p>各段階でClaudeは「考える」ことができます，<code>/compact</code> はこの「考える」履歴を压缩する操作です。流れを理解しておくと、「なぜここで止まるのだろう」と感じたときに原因を特定しやすくなります。</p>
+<hr />
+<h2>11. まとめ：この章で学んだこと</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>起動</strong></td>
+<td><code>claude</code> コマンドで対話モード开始</td>
+</tr>
+<tr>
+<td><strong>許可システム</strong></td>
+<td>危険な操作前に必ず確認・設定で自動化可能</td>
+</tr>
+<tr>
+<td><strong>スラッシュコマンド</strong></td>
+<td><code>/help</code>, <code>/model</code>, <code>/compact</code> など</td>
+</tr>
+<tr>
+<td><strong>セッション</strong></td>
+<td>会話ごとにコンテキストが独立</td>
+</tr>
+<tr>
+<td><strong>スキル</strong></td>
+<td>自動化されたプロンプトテンプレート</td>
+</tr>
+<tr>
+<td><strong>MCPサーバー</strong></td>
+<td>拡張可能なプラグイン機能</td>
+</tr>
+<tr>
+<td><strong>ChatGPTとの違い</strong></td>
+<td>ファイル編集・コマンド実行が可能</td>
+</tr>
+</tbody>
+</table></div>
+<p>次の章では、こうしたClaude Codeを効果的に使うための「プロンプトの書き方」を説明します。道具の使い方を学んだところで、次は「上手な指示の出し方」を身につけましょう。</p>
+
+        </article>
+
+        <nav class="chapter-nav-bottom">
+            
+            <a href="01-setup.html" class="nav-card prev">
+                <span class="nav-label">← 前の章</span>
+                <span class="nav-title">🏗️ 環境構築</span>
+            </a>
+            
+            
+            <a href="03-prompting.html" class="nav-card next">
+                <span class="nav-label">次の章 →</span>
+                <span class="nav-title">💬 プロンプト工学</span>
+            </a>
+            
+        </nav>
+    </main>
+
+    <script src="../assets/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+            themeVariables: { fontSize: '14px' }
+        });
+    </script>
+</body>
+</html>

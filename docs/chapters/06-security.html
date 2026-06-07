@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安全な使い方 — AI×Claude Code 教科書</title>
+    <meta name="description" content="AI×Claude Code 教科書 安全な使い方の解説 — 高校生向けAIコーディング入門">
+    <meta property="og:title" content="安全な使い方 — AI×Claude Code 教科書">
+    <meta property="og:description" content="AI×Claude Code 教科書 安全な使い方の解説">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://fukukei23.github.io/claude-code-textbook/chapters/06-security.html">
+    <meta property="og:image" content="https://fukukei23.github.io/claude-code-textbook/assets/ogp.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <button class="menu-toggle" aria-label="メニュー" id="menuToggle">
+            <span></span><span></span><span></span>
+        </button>
+        <a href="../index.html" class="site-title">📚 AI×Claude Code 教科書</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="テーマ切替">
+            <span class="icon-light">☀️</span>
+            <span class="icon-dark">🌙</span>
+        </button>
+    </header>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html">🏠 ホーム</a>
+        </div>
+        
+        <a href="00-ai-basics.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🤖</span>
+            AIの基礎
+        </a>
+        
+        <a href="01-setup.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🏗️</span>
+            環境構築
+        </a>
+        
+        <a href="02-usage.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚡</span>
+            Claude Codeの使い方
+        </a>
+        
+        <a href="03-prompting.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">💬</span>
+            プロンプト工学
+        </a>
+        
+        <a href="04-knowledge.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">📚</span>
+            知識管理
+        </a>
+        
+        <a href="05-automation.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚙️</span>
+            自動化と拡張
+        </a>
+        
+        <a href="06-security.html"
+           class="sidebar-link active">
+            <span class="sidebar-icon">🔒</span>
+            安全な使い方
+        </a>
+        
+        <a href="ref-commands.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⌨️</span>
+            コマンドリファレンス
+        </a>
+        
+        <a href="ref-troubleshoot.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🔧</span>
+            トラブルシューティング
+        </a>
+        
+        <a href="ref-prompts.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">💬</span>
+            プロンプト例文集
+        </a>
+        
+        <a href="ref-glossary.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">📖</span>
+            用語集
+        </a>
+        
+    </nav>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="content">
+        <div class="chapter-nav-top">
+            
+            <a href="05-automation.html" class="nav-prev">← 自動化と拡張</a>
+            
+            
+            <a href="ref-commands.html" class="nav-next">コマンドリファレンス →</a>
+            
+        </div>
+
+        <article class="chapter-body">
+            <hr />
+<h2>title: &quot;06 安全な使い方&quot;
+icon: &quot;🔒&quot;</h2>
+<h1>06 安全な使い方 — APIキー・コスト・リスク管理</h1>
+<div class="callout callout-info"><p>Claude Codeは便利だけど、APIキー流出や誤操作で痛い目に遭う也不少。この章で守るべきことを整理する。</p></div>
+<hr />
+<h2>APIキー流出を防ぐ</h2>
+<h3>APIキーとは？</h3>
+<p>APIキー = <strong>「この有料サービスを使ってもいいよ」という合図</strong>。持有人的金カードと連携しており、流出すると他人に勝手に使われて請求が来る。</p>
+<pre><code>APIキー流出の例:
+❌ GitHubにAPIキーをpush → 世界中に公開 → 数百ドルの請求
+❌ ChatGPTにAPIキーを貼り付け → 学習データに → 流出
+❌ スクリーンショットにAPIキーを映す → SNSで拡散
+</code></pre>
+<h3>安全な管理方法</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>説明</th>
+<th>安全度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>環境変数</strong></td>
+<td><code>.env</code>ファイルに書いて、コードからは <code>os.getenv(&quot;API_KEY&quot;)</code> で読む</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>.gitignore</code> に <code>.env</code> を追加</td>
+<td>誤ってGitに上げるのを防止</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>secrets.json</code></td>
+<td>JSONでも可。<code>.gitignore</code> に追加</td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td>ハードコード</td>
+<td>コードに直接書く。流出リスク大</td>
+<td>⭐</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>絶対にやること:</strong></p>
+<ul>
+<li><code>.gitignore</code> に <code>*.env</code>, <code>secrets.json</code>, <code>settings.local.json</code> を追加</li>
+<li>APIキーを共有スクリーンショットに映さない</li>
+<li>スクリーンキャスト（画面録画）中にも映らないよう注意</li>
+</ul>
+<hr />
+<h2>危険なコマンドについて</h2>
+<p>Claude Codeは<strong>破壊的なコマンドを実行する前に必ず確認を求める</strong>。</p>
+<h3>ブロックされる可能性のあるコマンド</h3>
+<pre><code>rm -rf /           ← 全ファイル削除
+DROP DATABASE      ← データベース全削除
+git push --force   ← コミット履歴を上書き
+sudo rm -rf /      ← システムファイル削除
+</code></pre>
+<h3>なぜブロックするか？</h3>
+<pre><code>ユーザーが「ファイル全部消して」と入力
+    ↓
+Claude Codeが「本当に消しますか？」と確認
+    ↓
+ユーザーが「はい」と答える
+    ↓
+実行（またはブロック）
+</code></pre>
+<p>この確認があるからこそ、<strong>うっかり大规模削除防げる</strong>。</p>
+<h3>確認画面の見分け方</h3>
+<pre><code>[Y/n] → Y=はい（実行）、n=いいえ（中止）
+y/n/c → y=はい、n=いいえ、c=キャンセルしてClaudeに任せる
+</code></pre>
+<p><strong>確認を省略する（「auto-confirm」）は便利だけど危険。</strong> 慣れてからでも必要最小限に。</p>
+<hr />
+<h2>コスト管理</h2>
+<p>Claude Codeの裏で動いているLLMは有料。<strong>トークン数に応じて料金が発生する</strong>。</p>
+<h3>コストが大きくなるパターン</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>パターン</th>
+<th>対策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>長いセッション（50ターン以上）</td>
+<td>定期的に <code>/compact</code> でコンテキスト圧縮</td>
+</tr>
+<tr>
+<td>大きなファイルの丸ごと読込</td>
+<td>「このファイル前半100行を読んで」と具体的に指定</td>
+</tr>
+<tr>
+<td>同じ質問を何度もする</td>
+<td>先に「〜についてまとめて」と聞いてから質問</td>
+</tr>
+<tr>
+<td>MCPツールの乱発</td>
+<td>必要なサーバーだけ有効化（使っていないサーバーは切る）</td>
+</tr>
+</tbody>
+</table></div>
+<h3>コスト確認方法</h3>
+<pre><code>/context
+</code></pre>
+<p>を実行すると、現在のコンテキスト使用量が表示される。<strong>4,000トークン消費する</strong>ので多用は禁物。</p>
+<hr />
+<h2>やってはいけないこと</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>やってはいけないこと</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>APIキーをコードに直書き</td>
+<td>流出した請求が来る</td>
+</tr>
+<tr>
+<td><code>auto-confirm: true</code> で危険な操作</td>
+<td>確認なしで実行され被害拡大</td>
+</tr>
+<tr>
+<td>理解していないコードをClaudeに書かせて実行</td>
+<td>バグでデータが壊れる</td>
+</tr>
+<tr>
+<td>セキュリティ的に重要なファイルを気軽に触らせる</td>
+<td>設定ミスを突かれる</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>やったほうがいいこと</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>やったほうがいいこと</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>作業前に必ずバックアップ</td>
+<td>何があっても元に戻せる</td>
+</tr>
+<tr>
+<td><code>git commit</code> を小まめに</td>
+<td>問題が起きたらロールバック可能</td>
+</tr>
+<tr>
+<td>Claudeの提案を先に読んでから「はい」</td>
+<td>思ってたんと違う を防ぐ</td>
+</tr>
+<tr>
+<td>重要な操作は「1つずつ確認しながら」</td>
+<td>一括実行より安全</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>まとめ</h2>
+<pre><code>┌─────────────────────────────────────────────┐
+│  安全のための3原則                             │
+│                                              │
+│  1. APIキーは環境変数で管理・.gitignoreに追加   │
+│  2. 危険な操作は確認を読んでから許可            │
+│  3. 作業はgitで小まめにコミット                │
+└─────────────────────────────────────────────┘
+</code></pre>
+<p>Claude Codeは強力だけど、<strong>最終責任は使用者にある</strong>。便利さに頼りすぎず、基本を守ることで安全に活用できる。</p>
+<hr />
+<h2>用語確認</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>用語</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>APIキー</strong></td>
+<td>サービス利用の認証キー。流出すると悪用される</td>
+</tr>
+<tr>
+<td><strong>トークン</strong></td>
+<td>テキストの分割単位。LLMへの入出力はこの単位で計費</td>
+</tr>
+<tr>
+<td><strong>コンテキスト</strong></td>
+<td>現在の会話の流れ。長いほど多くのトークンを消費</td>
+</tr>
+<tr>
+<td><strong>auto-confirm</strong></td>
+<td>確認なしで操作を実行する設定。便利だが危険</td>
+</tr>
+</tbody>
+</table></div>
+
+        </article>
+
+        <nav class="chapter-nav-bottom">
+            
+            <a href="05-automation.html" class="nav-card prev">
+                <span class="nav-label">← 前の章</span>
+                <span class="nav-title">⚙️ 自動化と拡張</span>
+            </a>
+            
+            
+            <a href="ref-commands.html" class="nav-card next">
+                <span class="nav-label">次の章 →</span>
+                <span class="nav-title">⌨️ コマンドリファレンス</span>
+            </a>
+            
+        </nav>
+    </main>
+
+    <script src="../assets/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+            themeVariables: { fontSize: '14px' }
+        });
+    </script>
+</body>
+</html>
