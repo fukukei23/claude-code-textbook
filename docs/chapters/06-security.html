@@ -115,11 +115,11 @@
 <h2>title: &quot;06 安全な使い方&quot;
 icon: &quot;🔒&quot;</h2>
 <h1>06 安全な使い方 — APIキー・コスト・リスク管理</h1>
-<div class="callout callout-info"><p>Claude Codeは便利だけど、APIキー流出や誤操作で痛い目に遭う也不少。この章で守るべきことを整理する。</p></div>
+<div class="callout callout-info"><p>Claude Codeは便利だけど、APIキー流出や誤操作で痛い目に遭うことも少なくありません。この章で守るべきことを整理する。</p></div>
 <hr />
 <h2>APIキー流出を防ぐ</h2>
 <h3>APIキーとは？</h3>
-<p>APIキー = <strong>「この有料サービスを使ってもいいよ」という合図</strong>。持有人的金カードと連携しており、流出すると他人に勝手に使われて請求が来る。</p>
+<p>APIキー = <strong>「この有料サービスを使ってもいいよ」という合図</strong>。所有者のクレジットカードと連携しており、流出すると他人に勝手に使われて請求が来る。</p>
 <pre><code>APIキー流出の例:
 ❌ GitHubにAPIキーをpush → 世界中に公開 → 数百ドルの請求
 ❌ ChatGPTにAPIキーを貼り付け → 学習データに → 流出
@@ -181,7 +181,7 @@ Claude Codeが「本当に消しますか？」と確認
     ↓
 実行（またはブロック）
 </code></pre>
-<p>この確認があるからこそ、<strong>うっかり大规模削除防げる</strong>。</p>
+<p>この確認があるからこそ、<strong>うっかり大規模削除防げる</strong>。</p>
 <h3>確認画面の見分け方</h3>
 <pre><code>[Y/n] → Y=はい（実行）、n=いいえ（中止）
 y/n/c → y=はい、n=いいえ、c=キャンセルしてClaudeに任せる

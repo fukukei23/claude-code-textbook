@@ -278,9 +278,9 @@ Building context from recent files...
 │  → 別のプロジェクトの文脈は保持しない │
 └─────────────────────────────────────────┘
 </code></pre>
-<p><strong>セッションごとにコンテキストは独立</strong>しています。セッションAで学んだことはセッションBには反映されません。これは意図的な設計で、プロジェクトごとに话题を分开でき、雑多な情報が混ざるのを防げます。</p>
+<p><strong>セッションごとにコンテキストは独立</strong>しています。セッションAで学んだことはセッションBには反映されません。これは意図的な設計で、プロジェクトごとにトピックを分離でき、雑多な情報が混ざるのを防げます。</p>
 <h3>セッションの引き継ぎ（handover）</h3>
-<p>新しいセッションを始めるときに <code>/new-session</code> を使う（または新しいトピック话题を切り离ると）と、Claudeは「前回の続き」についての情報を聞いてきます。ここで概要を渡すことで、新しいClaudeが前回の文脈を理解して継続できます。</p>
+<p>新しいセッションを始めるときに <code>/new-session</code> を使う（または新しいトピックを切り替えると）と、Claudeは「前回の続き」についての情報を聞いてきます。ここで概要を渡すことで、新しいClaudeが前回の文脈を理解して継続できます。</p>
 <pre><code>&gt; /new-session
 前回のプロジェクトについて教えてください。
 （ auth.py のログイン機能を作っていました）
@@ -292,7 +292,7 @@ Building context from recent files...
 <li>同じ質問を繰り返す</li>
 <li>回答の品質が低下する</li>
 </ul>
-<p>こうした場合は <code>/compact</code> で整理するか、新しいセッションを始めて引き継ぐのが效果的です。一つのセッションで一日中作業するのではなく、作業の区切りでセッションを切り替えることをお勧めします。</p>
+<p>こうした場合は <code>/compact</code> で整理するか、新しいセッションを始めて引き継ぐのが効果的です。一つのセッションで一日中作業するのではなく、作業の区切りでセッションを切り替えることをお勧めします。</p>
 <hr />
 <h2>5. スキル（Skills）とは</h2>
 <p>スキルは、特定のタスクに備えて自動化された<strong>プロンプトテンプレート</strong>です。あなたが「〜について調査して」「〜を作って」と言ったとき、関連するスキルが自動的に激活します。</p>
@@ -337,7 +337,7 @@ Building context from recent files...
 </tr>
 </tbody>
 </table></div>
-<p>スキルは標準で备わっているものもあれば、あなたが自作できるものもあります。「よくやる作业」をスキルとして登録しておくと、同じ指示を简単 반復できて便利です。</p>
+<p>スキルは標準で備わっているものもあれば、あなたが自作できるものもあります。「よくやる作業」をスキルとして登録しておくと、同じ指示を简単 復できて便利です。</p>
 <h3>スキルが激活する流れ</h3>
 <p>スキルは「自動激活」と「手動激活」の2通りがあります。手動激活は <code>/skill-name</code> のように直接コマンドを入力する方法です。自動激活は、あなたの入力文をClaudeが分析し、関連するスキルを自動的に選択して実行します。</p>
 <pre><code class="language-mermaid">flowchart TD
@@ -365,7 +365,7 @@ Building context from recent files...
 │ MCP      │ │ Search   │ │ MCP       │
 │ │ │          │ │ │
 │ リポジトリ│ │ WEB検索   │ │ ブラウザ │
-│ 操作 │ │ニュース  │ │自动化    │
+│ 操作 │ │ニュース  │ │自動化    │
 │ Issue/PR │ │ 画像検索 │ │ 操作 │
 └──────────┘ └──────────┘ └──────────┘
 </code></pre>
@@ -388,7 +388,7 @@ Building context from recent files...
 </tr>
 <tr>
 <td><code>playwright</code></td>
-<td>ブラウザの自动化操作（クリック・入力・screenshots）</td>
+<td>ブラウザの自動化操作（クリック・入力・screenshots）</td>
 </tr>
 <tr>
 <td><code>context7</code></td>
@@ -463,7 +463,7 @@ Building context from recent files...
 <tr>
 <td>許可システム</td>
 <td>なし</td>
-<td>組み込み済み</td>
+<td>組み込み</td>
 </tr>
 </tbody>
 </table></div>
@@ -487,7 +487,7 @@ Building context from recent files...
 <div class="table-wrapper"><table>
 <thead>
 <tr>
-<th>作业内容</th>
+<th>作業内容</th>
 <th>向いているツール</th>
 </tr>
 </thead>
@@ -552,11 +552,11 @@ $ claude --print &quot;PythonでHello Worldを表示するコードを見せて&
 # ファイルを与えて分析させる
 $ claude --print &quot;このコードのバグを直して&quot; &lt; auth.py
 </code></pre>
-<p><code>--print</code> はスクリプトや自动化に活用できますが、複雑な作业には対話モードを使うのがおすすめです。</p>
+<p><code>--print</code> はスクリプトや自動化に活用できますが、複雑な作業には対話モードを使うのがおすすめです。</p>
 <hr />
 <h2>9. プロジェクトごとの設定ファイル</h2>
-<p>Claude Codeは <code>~/.claude/settings.json</code> で全体設定を、<code>プロジェクトルート/.claude/settings.json</code> でプロジェクト별 설정을行えます。</p>
-<h3>プロジェクト별設定の例</h3>
+<p>Claude Codeは <code>~/.claude/settings.json</code> で全体設定を、<code>プロジェクトルート/.claude/settings.json</code> でプロジェクトごとの 設定を行えます。</p>
+<h3>プロジェクトごとの設定の例</h3>
 <pre><code>my-project/
 ├── src/
 │   └── app.py
@@ -565,7 +565,7 @@ $ claude --print &quot;このコードのバグを直して&quot; &lt; auth.py
 └── .claude/
     └── settings.json   ← プロジェクトごとの設定
 </code></pre>
-<p>このプロジェクト별設定ファイルには、以下のような项目を書けます。</p>
+<p>このプロジェクトごとの設定ファイルには、以下のような項目を書けます。</p>
 <ul>
 <li><strong>許可ルールのoverride</strong>: プロジェクト内でだけ許可する操作</li>
 <li><strong>利用可能なMCPサーバー</strong>: プロジェクトunikの拡張機能</li>
@@ -574,7 +574,7 @@ $ claude --print &quot;このコードのバグを直して&quot; &lt; auth.py
 <p>こうすることで、「このプロジェクトではこの操作だけ許可したい」といった精细な制御が可能になります。</p>
 <hr />
 <h2>10. ツール呼び出しの流れ</h2>
-<p>Claude Codeが内部でどのように動いているか、理解しておくとトラブル 대응に便利です。Claudeがファイルを編集したりコマンドを実行したりするとき、以下の流程をたどります。</p>
+<p>Claude Codeが内部でどのように動いているか、理解しておくとトラブル対応に便利です。Claudeがファイルを編集したりコマンドを実行したりするとき、以下のフローをたどります。</p>
 <pre><code>あなた: 「auth.py のログイン関数に空文字チェックを追加して」
 
  ↓
