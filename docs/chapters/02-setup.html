@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>環境構築 — AI×Claude Code 教科書</title>
+    <meta name="description" content="AI×Claude Code 教科書 環境構築の解説 — 高校生向けAIコーディング入門">
+    <meta property="og:title" content="環境構築 — AI×Claude Code 教科書">
+    <meta property="og:description" content="AI×Claude Code 教科書 環境構築の解説">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://fukukei23.github.io/claude-code-textbook/chapters/02-setup.html">
+    <meta property="og:image" content="https://fukukei23.github.io/claude-code-textbook/assets/ogp.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <button class="menu-toggle" aria-label="メニュー" id="menuToggle">
+            <span></span><span></span><span></span>
+        </button>
+        <a href="../index.html" class="site-title">📚 AI×Claude Code 教科書</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="テーマ切替">
+            <span class="icon-light">☀️</span>
+            <span class="icon-dark">🌙</span>
+        </button>
+    </header>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html">🏠 ホーム</a>
+        </div>
+        
+        <a href="00-quick.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚡</span>
+            さっとわかる版
+        </a>
+        
+        <a href="01-ai-basics.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🤖</span>
+            AIの基礎
+        </a>
+        
+        <a href="02-setup.html"
+           class="sidebar-link active">
+            <span class="sidebar-icon">🏗️</span>
+            環境構築
+        </a>
+        
+        <a href="03-usage.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚡</span>
+            Claude Codeの使い方
+        </a>
+        
+        <a href="04-prompting.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">💬</span>
+            プロンプト工学
+        </a>
+        
+        <a href="05-knowledge.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">📚</span>
+            知識管理
+        </a>
+        
+        <a href="06-automation.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚙️</span>
+            自動化と拡張
+        </a>
+        
+        <a href="07-security.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🔒</span>
+            安全な使い方
+        </a>
+        
+        <a href="08-github.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🐙</span>
+            GitHub入門
+        </a>
+        
+        <a href="ref-commands.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⌨️</span>
+            コマンドリファレンス
+        </a>
+        
+        <a href="ref-troubleshoot.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🔧</span>
+            トラブルシューティング
+        </a>
+        
+        <a href="ref-prompts.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">💬</span>
+            プロンプト例文集
+        </a>
+        
+        <a href="ref-glossary.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">📖</span>
+            用語集
+        </a>
+        
+    </nav>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="content">
+        <div class="chapter-nav-top">
+            <a href="../index.html" class="nav-home">🏠 ホーム</a>
+            
+            <a href="01-ai-basics.html" class="nav-prev">← AIの基礎</a>
+            
+            
+            <a href="03-usage.html" class="nav-next">Claude Codeの使い方 →</a>
+            
+        </div>
+
+        <article class="chapter-body">
+            <hr />
+<h2>title: &quot;01_環境構築&quot;
+icon: &quot;⚙️&quot;</h2>
+<h1>Claude Code を始めよう</h1>
+<p>この章では、Windows + WSL2 環境に Claude Code をインストールする方法を説明します。Linux ユーザーは同じ手順でインストールできます。</p>
+<hr />
+<h2>必要なもの</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>最小要件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OS</td>
+<td>Windows 10 (version 2004以上) または Windows 11</td>
+</tr>
+<tr>
+<td>WSL2</td>
+<td>Ubuntu 20.04 以降</td>
+</tr>
+<tr>
+<td>Node.js</td>
+<td>バージョン 18 以上</td>
+</tr>
+<tr>
+<td>メモリ</td>
+<td>4GB 以上（8GB 以上推奨）</td>
+</tr>
+</tbody>
+</table></div>
+<div class="callout callout-info"><p><strong>WSL2 とは？</strong> Windows Subsystem for Linux 2 の略。Windows上でLinuxを動かせる仕組みです。</p></div>
+<hr />
+<h2>Step 1: WSL2 をインストールする</h2>
+<h3>PowerShell を管理者権限で開く</h3>
+<ol>
+<li>Windows キーを押す</li>
+<li>「PowerShell」と検索</li>
+<li>「管理者として実行」をクリック</li>
+</ol>
+<h3>WSL2 を有効化する</h3>
+<pre><code class="language-powershell"># WSL と仮想マシンプラットフォームを有効化
+wsl --install
+
+# 再起動を促されたら再起動する
+</code></pre>
+<h3>初期設定</h3>
+<p>再起動後、Ubuntu が起動し、<strong>ユーザー名とパスワードの設定</strong>を求められます。</p>
+<pre><code>Installing, this may take a few minutes...
+Please create a default UNIX user account.
+New password: ********
+Confirm password: ********
+</code></pre>
+<hr />
+<h2>Step 2: Node.js をインストールする</h2>
+<pre><code class="language-bash"># パッケージリストを更新
+sudo apt update &amp;&amp; sudo apt upgrade -y
+
+# Node.js 18.x をインストール
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install -y nodejs
+
+# バージョン確認
+node --version    # → v18.x.x と表示されればOK
+npm --version     # → 9.x.x と表示されればOK
+</code></pre>
+<hr />
+<h2>Step 3: Claude Code をインストールする</h2>
+<h3>推奨: 公式インストーラー（自動更新対応）</h3>
+<pre><code class="language-bash"># Linux/macOS/WSL2 の場合
+curl -fsSL https://claude.ai/install.sh | bash
+</code></pre>
+<h3>代替: npm でインストールする</h3>
+<pre><code class="language-bash">npm install -g @anthropic-ai/claude-code
+
+# 確認
+claude --version
+</code></pre>
+<hr />
+<h2>Step 4: 認証する</h2>
+<h3>Claude Code を初めて起動する</h3>
+<pre><code class="language-bash">claude
+</code></pre>
+<h4>方法A: OAuth（推奨）</h4>
+<p>初回起動時、ブラウザで Anthropic アカウント認証を求められます。</p>
+<ol>
+<li>表示される URL をクリック（またはコピーしてブラウザで開く）</li>
+<li>Anthropic アカウントでログイン</li>
+<li>許可ボタンをクリック</li>
+<li>ターミナルに戻る</li>
+</ol>
+<h4>方法B: API キー</h4>
+<pre><code class="language-bash"># 環境変数に設定
+export ANTHROPIC_API_KEY=your-api-key-here
+
+# 永続化する場合
+echo 'export ANTHROPIC_API_KEY=your-api-key-here' &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+<div class="callout callout-info"><p><strong>API キーを取得</strong>: <a href="https://console.anthropic.com/">Anthropic Console</a> でアカウントを作成し、API Keys から生成できます。</p></div>
+<hr />
+<h2>Step 5: WSL2 固有の設定</h2>
+<p>Windows + WSL2 環境で使う場合、ブラウザ連携を設定します。</p>
+<h3>Windows ブラウザを設定する</h3>
+<pre><code class="language-bash"># ~/.bashrc に追加
+echo 'export BROWSER=&quot;/mnt/c/Program Files/Google/Chrome/Application/chrome.exe&quot;' &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+<p>他のブラウザを使う場合のパス:</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>ブラウザ</th>
+<th>パス</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chrome</td>
+<td><code>/mnt/c/Program Files/Google/Chrome/Application/chrome.exe</code></td>
+</tr>
+<tr>
+<td>Edge</td>
+<td><code>/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe</code></td>
+</tr>
+<tr>
+<td>Firefox</td>
+<td><code>/mnt/c/Program Files/Mozilla Firefox/firefox.exe</code></td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>Step 6: 設定ファイルを作成する</h2>
+<p>Claude Code は <code>~/.claude/</code> ディレクトリ内のファイルで設定を管理します。</p>
+<h3>settings.json の作成</h3>
+<pre><code class="language-bash"># 設定ディレクトリを作成
+mkdir -p ~/.claude
+
+# 設定ファイルを作成
+cat &gt; ~/.claude/settings.json &lt;&lt; 'EOF'
+{
+  &quot;$schema&quot;: &quot;https://json.schemastore.org/claude-code-settings.json&quot;,
+  &quot;permissions&quot;: {
+    &quot;allow&quot;: [
+      &quot;Bash(npm run *)&quot;,
+      &quot;Bash(git *)&quot;
+    ],
+    &quot;deny&quot;: [
+      &quot;Bash(curl *)&quot;,
+      &quot;Read(./.env)&quot;
+    ]
+  }
+}
+EOF
+</code></pre>
+<div class="callout callout-info"><p><strong>settings.json の役割</strong>: Claude Code に許可する操作（コマンド実行、ファイル読み書きなど）を指定します。</p></div>
+<h3>CLAUDE.md の作成（プロジェクト固有ルール）</h3>
+<p>プロジェクトフォルダに <code>CLAUDE.md</code> を作成すると、プロジェクトのルールを Claude Code に知らせられます。</p>
+<pre><code class="language-bash"># プロジェクトフォルダに移動
+cd ~/your-project
+
+# CLAUDE.md を作成
+cat &gt; CLAUDE.md &lt;&lt; 'EOF'
+# プロジェクトルール
+
+## コーディング規約
+- 日本語コメントを使用
+- インデントはスペース2つ
+
+## 一般的なタスク
+- 新しいファイル作成時は必ずテストを書く
+- コミット前にリントを実行
+EOF
+</code></pre>
+<hr />
+<h2>Step 7: 動作確認</h2>
+<pre><code class="language-bash"># バージョン確認
+claude --version
+
+# ヘルプ表示
+claude --help
+
+# 対話モードで起動
+claude
+</code></pre>
+<p>初回テストとして、以下を入力してみましょう:</p>
+<pre><code>say: 「こんにちは！元気？」
+</code></pre>
+<p>応答があれば、正常に動作しています。</p>
+<hr />
+<h2>トラブルシューティング</h2>
+<h3><code>wsl: command not found</code></h3>
+<p><strong>原因</strong>: WSL2 が有効化されていない</p>
+<p><strong>解決</strong>:</p>
+<pre><code class="language-powershell"># PowerShell（管理者）で実行
+wsl --install
+# PCを再起動
+</code></pre>
+<h3><code>claude: command not found</code></h3>
+<p><strong>原因</strong>: インストール失敗、または PATH が通っていない</p>
+<p><strong>解決</strong>:</p>
+<pre><code class="language-bash"># npm のグローバルパス確認
+npm bin -g
+
+# PATH に追加
+echo 'export PATH=&quot;$(npm bin -g):$PATH&quot;' &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+<h3><code>Permission denied</code>（npm インストール時）</h3>
+<p><strong>解決</strong>:</p>
+<pre><code class="language-bash"># npm のパーミッション設定を変更
+mkdir -p ~/.npm-global
+npm config set prefix '~/.npm-global'
+echo 'export PATH=~/.npm-global/bin:$PATH' &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+<h3><code>API key not found</code></h3>
+<p><strong>原因</strong>: 環境変数 ANTHROPIC_API_KEY が設定されていない</p>
+<p><strong>解決</strong>:</p>
+<pre><code class="language-bash">export ANTHROPIC_API_KEY=your-api-key-here
+echo 'export ANTHROPIC_API_KEY=your-api-key-here' &gt;&gt; ~/.bashrc
+</code></pre>
+<h3>OAuth 認証が失敗する</h3>
+<p><strong>解決</strong>:</p>
+<ol>
+<li>ターミナルに表示される URL を手動でブラウザで開く</li>
+<li>認証を完了する</li>
+<li>ターミナルに戻る</li>
+</ol>
+<hr />
+<h2>まとめ</h2>
+<pre><code>┌─────────────────────────────────────────────┐
+│        Claude Code インストール まとめ       │
+├─────────────────────────────────────────────┤
+│  1. WSL2 を有効化（Windows）                 │
+│  2. Ubuntu をセットアップ                    │
+│  3. Node.js 18+ をインストール               │
+│  4. 公式インストーラーで Claude Code を導入  │
+│  5. OAuth または API キーで認証               │
+│  6. ~/.claude/settings.json で設定           │
+│  7. 動作確認（claude --version）            │
+└─────────────────────────────────────────────┘
+</code></pre>
+<p>次の章では、Claude Code の基本的な使い方を説明します。</p>
+
+        </article>
+
+        <nav class="chapter-nav-bottom">
+            
+            <a href="01-ai-basics.html" class="nav-card prev">
+                <span class="nav-label">← 前の章</span>
+                <span class="nav-title">🤖 AIの基礎</span>
+            </a>
+            
+            <a href="../index.html" class="nav-card home">
+                <span class="nav-label">🏠</span>
+                <span class="nav-title">ホームに戻る</span>
+            </a>
+            
+            <a href="03-usage.html" class="nav-card next">
+                <span class="nav-label">次の章 →</span>
+                <span class="nav-title">⚡ Claude Codeの使い方</span>
+            </a>
+            
+        </nav>
+    </main>
+
+    <script src="../assets/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+            themeVariables: { fontSize: '14px' }
+        });
+    </script>
+</body>
+</html>

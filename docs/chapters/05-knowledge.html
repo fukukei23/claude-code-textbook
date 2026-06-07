@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知識管理 — AI×Claude Code 教科書</title>
+    <meta name="description" content="AI×Claude Code 教科書 知識管理の解説 — 高校生向けAIコーディング入門">
+    <meta property="og:title" content="知識管理 — AI×Claude Code 教科書">
+    <meta property="og:description" content="AI×Claude Code 教科書 知識管理の解説">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://fukukei23.github.io/claude-code-textbook/chapters/05-knowledge.html">
+    <meta property="og:image" content="https://fukukei23.github.io/claude-code-textbook/assets/ogp.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <button class="menu-toggle" aria-label="メニュー" id="menuToggle">
+            <span></span><span></span><span></span>
+        </button>
+        <a href="../index.html" class="site-title">📚 AI×Claude Code 教科書</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="テーマ切替">
+            <span class="icon-light">☀️</span>
+            <span class="icon-dark">🌙</span>
+        </button>
+    </header>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html">🏠 ホーム</a>
+        </div>
+        
+        <a href="00-quick.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚡</span>
+            さっとわかる版
+        </a>
+        
+        <a href="01-ai-basics.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🤖</span>
+            AIの基礎
+        </a>
+        
+        <a href="02-setup.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🏗️</span>
+            環境構築
+        </a>
+        
+        <a href="03-usage.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚡</span>
+            Claude Codeの使い方
+        </a>
+        
+        <a href="04-prompting.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">💬</span>
+            プロンプト工学
+        </a>
+        
+        <a href="05-knowledge.html"
+           class="sidebar-link active">
+            <span class="sidebar-icon">📚</span>
+            知識管理
+        </a>
+        
+        <a href="06-automation.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚙️</span>
+            自動化と拡張
+        </a>
+        
+        <a href="07-security.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🔒</span>
+            安全な使い方
+        </a>
+        
+        <a href="08-github.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🐙</span>
+            GitHub入門
+        </a>
+        
+        <a href="ref-commands.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⌨️</span>
+            コマンドリファレンス
+        </a>
+        
+        <a href="ref-troubleshoot.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🔧</span>
+            トラブルシューティング
+        </a>
+        
+        <a href="ref-prompts.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">💬</span>
+            プロンプト例文集
+        </a>
+        
+        <a href="ref-glossary.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">📖</span>
+            用語集
+        </a>
+        
+    </nav>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="content">
+        <div class="chapter-nav-top">
+            <a href="../index.html" class="nav-home">🏠 ホーム</a>
+            
+            <a href="04-prompting.html" class="nav-prev">← プロンプト工学</a>
+            
+            
+            <a href="06-automation.html" class="nav-next">自動化と拡張 →</a>
+            
+        </div>
+
+        <article class="chapter-body">
+            <hr />
+<h2>title: &quot;04 知識管理&quot;
+icon: &quot;📚&quot;</h2>
+<h1>04 知識管理</h1>
+<p>Claude Code は非常に有能力な AI アシスタントですが、一つ大きな特徴があります。それは「セッションごとに記憶がリセットされる」ということです。今日は覚えていたことも、次回のセッションでは完全从头来过。この問題を解決し、AIとの作業をずっと快適にするのが「知識管理」です。</p>
+<h2>04-1 問題: AI は前回のことを忘れないけない</h2>
+<p>Claude Code で作業していて、こんな経験はないでしょうか。</p>
+<ul>
+<li>前回選んだ技術構成を忘れてしまって、また一から議論のやり直しになった</li>
+<li>前回解決したバグの方法を覚えていれば効率的だったのに</li>
+<li>「あのコマンド、どこかで使ったんだけど…」と找不到</li>
+</ul>
+<p>これは Claude Code の欠陥ではなく、设计上の特性です。セッションが終わるたびに、AI の文脈はクリアされます。これはセキュリティとプライバシーのためです。しかし、你打ち上げNpcle毎回同じ山脉を登るのは非効率です。</p>
+<p>そこで重要になるのが「Single Source of Truth（SSOT）」、つまり「唯一の正しい情報源」という概念です。</p>
+<h2>04-2 解決策: SSOT（唯一の正しい情報源）を構築する</h2>
+<p>SSOT とは、特定のテーマに関するすべての意思決定、知識、判断を記録する场 所です。AI はこの記録を読み込むことで、前回の続きからすぐに作業を開始できます。</p>
+<h3>記録すべき内容</h3>
+<p>具体的に何を記録すれよいでしょうか。以下のカテゴリーを意識しましょう。</p>
+<p><strong>技術的な意思決定</strong></p>
+<ul>
+<li>なぜ A より B を選んだのか</li>
+<li>アーキテクチャの決定理由</li>
+<li>使用しているライブラリやツールのバージョン情報</li>
+</ul>
+<p><strong>バグと解決策</strong></p>
+<ul>
+<li>遭遇したバグの内容</li>
+<li>解決までに試したこと</li>
+<li>最終的な解決方法</li>
+</ul>
+<p><strong>便利コマンド・パターン</strong></p>
+<ul>
+<li>よく使うCLIコマンド</li>
+<li>定型的な作業フロー</li>
+<li>デバッグのコツ</li>
+</ul>
+<h3>日次ログのフォーマット</h3>
+<p>毎日作業後に簡単に記録する習慣をつけましょう。フォーマットは以下の通りです。</p>
+<pre><code>##2024-06-01
+
+### やったこと
+-プロジェクト X のセットアップ完了
+- ログイン機能を実装
+
+### うまくいったこと
+- カスタムフックで自動バックアップが正しく動作した
+
+### うまくいかなかったこと
+- 当初予定していたライブラリ A が環境と合わず切换
+- →代わりにライブラリ B を使用することに决定
+
+### 次のアクション
+- ユーザー認証のテストを書く
+- ドキュメントの整備
+</code></pre>
+<p>このような简単な记录があれば、次のセッションで迷わずスタートできます。</p>
+<h2>04-3 ファイルの整理方法</h2>
+<p>記録が増えすぎると找不到になります。以下の原则で整理しましょう。</p>
+<p><strong>プロジェクト単位でグループ化する</strong>
+プロジェクトごとにフォルダを分けることで、関連情報が一目でわかります。</p>
+<p><strong>命名規則を一貫させる</strong>
+日付形式は <code>YYYY-MM-DD</code> で统一しましょう。また<code>、</code>前缀に用途を示すキーワードをつけるのがおすすめです（例：<code>todo_</code>、<code>memo_</code>、<code>decision_</code>）。</p>
+<h3>サンプルフォルダ構成</h3>
+<pre><code>project/
+├── .claude/
+│   ├── settings.json          # Claude Code の設定
+│   ├── hooks.json # 自動化フック設定
+│   └── memory/
+│       └── MEMORY.md          # メインメモリー（索引）
+├── docs/
+│   ├── 00_SYSTEM/
+│   │   ├── 全体マップ_MOC.md   # 全 Topics の索引
+│   │   ├── バックログ.md # 未完了タスク一覧
+│   │   └── プロジェクト概要.md
+│   ├── 01_DECISIONS/
+│   │   ├── 技術選定.md         # なぜこの技術を選んだか
+│   │   ├── アーキテクチャ.md   # システム構成の記録
+│   │   └──  問題と解決.md   # 遭遇したバグと対策
+│   └── 02_LOGS/
+│       ├── 2024-06-01.md      # 日次作業ログ
+│       ├── 2024-06-02.md
+│       └── 2024-06-03.md
+├── src/                       # ソースコード
+├── tests/                     # テストコード
+└── README.md                  # プロジェクト概要
+</code></pre>
+<p>この構成では <code>.claude/</code> フォルダに Claude Code 用の設定とメモリを置き、<code>docs/</code> フォルダに人が読むドキュメントを配置します。こうすることで、AI 用と人用の情報が混在しません。</p>
+<h2>04-4 ドキュメンテーションを习惯にする</h2>
+<p>「記録する時間がない」は，最大的誤解です。記録は5分もかかりません。また、記録する行为自体が思考の整理になり、実業務でも有用です。</p>
+<p><strong>毎日5分の投資</strong>
+作業終了時に、今日何をしたか簡単にメモする習慣をつけます。箇条書きで十分です。</p>
+<p><strong>その场その場で记录</strong>
+决策をした瞬間に、その理由を記録します。あとから思い出そうとしても大致忘れてしまいます。</p>
+<p><strong>「あとで書く」は絶対しない</strong>
+その场で書けないなら、书く资格がないということです。思考が新鮮なうちに記録しましょう。</p>
+<h2>04-5 ツールとしての Markdown</h2>
+<p>知识管理に Markdown は最適なフォーマットです。</p>
+<ul>
+<li><strong>シンプル</strong>:メモ帳でも開いて書ける</li>
+<li><strong>読みやすい</strong>: プレビューなしでも构成がわかる</li>
+<li><strong>どこでも動く</strong>: PCでもスマホでも、特別なソフト不要</li>
+<li><strong>差分が見やすい</strong>: Git と組み合わせて変更履歴を管理できる</li>
+</ul>
+<p>Claude Code は Markdown を标准で理解できますので、記録した Markdownファイルを直接読ませて、AI と共有知识として活用できます。</p>
+
+        </article>
+
+        <nav class="chapter-nav-bottom">
+            
+            <a href="04-prompting.html" class="nav-card prev">
+                <span class="nav-label">← 前の章</span>
+                <span class="nav-title">💬 プロンプト工学</span>
+            </a>
+            
+            <a href="../index.html" class="nav-card home">
+                <span class="nav-label">🏠</span>
+                <span class="nav-title">ホームに戻る</span>
+            </a>
+            
+            <a href="06-automation.html" class="nav-card next">
+                <span class="nav-label">次の章 →</span>
+                <span class="nav-title">⚙️ 自動化と拡張</span>
+            </a>
+            
+        </nav>
+    </main>
+
+    <script src="../assets/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+            themeVariables: { fontSize: '14px' }
+        });
+    </script>
+</body>
+</html>

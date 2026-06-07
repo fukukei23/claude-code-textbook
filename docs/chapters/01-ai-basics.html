@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIの基礎 — AI×Claude Code 教科書</title>
+    <meta name="description" content="AI×Claude Code 教科書 AIの基礎の解説 — 高校生向けAIコーディング入門">
+    <meta property="og:title" content="AIの基礎 — AI×Claude Code 教科書">
+    <meta property="og:description" content="AI×Claude Code 教科書 AIの基礎の解説">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://fukukei23.github.io/claude-code-textbook/chapters/01-ai-basics.html">
+    <meta property="og:image" content="https://fukukei23.github.io/claude-code-textbook/assets/ogp.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <button class="menu-toggle" aria-label="メニュー" id="menuToggle">
+            <span></span><span></span><span></span>
+        </button>
+        <a href="../index.html" class="site-title">📚 AI×Claude Code 教科書</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="テーマ切替">
+            <span class="icon-light">☀️</span>
+            <span class="icon-dark">🌙</span>
+        </button>
+    </header>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html">🏠 ホーム</a>
+        </div>
+        
+        <a href="00-quick.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚡</span>
+            さっとわかる版
+        </a>
+        
+        <a href="01-ai-basics.html"
+           class="sidebar-link active">
+            <span class="sidebar-icon">🤖</span>
+            AIの基礎
+        </a>
+        
+        <a href="02-setup.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🏗️</span>
+            環境構築
+        </a>
+        
+        <a href="03-usage.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚡</span>
+            Claude Codeの使い方
+        </a>
+        
+        <a href="04-prompting.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">💬</span>
+            プロンプト工学
+        </a>
+        
+        <a href="05-knowledge.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">📚</span>
+            知識管理
+        </a>
+        
+        <a href="06-automation.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚙️</span>
+            自動化と拡張
+        </a>
+        
+        <a href="07-security.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🔒</span>
+            安全な使い方
+        </a>
+        
+        <a href="08-github.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🐙</span>
+            GitHub入門
+        </a>
+        
+        <a href="ref-commands.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⌨️</span>
+            コマンドリファレンス
+        </a>
+        
+        <a href="ref-troubleshoot.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🔧</span>
+            トラブルシューティング
+        </a>
+        
+        <a href="ref-prompts.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">💬</span>
+            プロンプト例文集
+        </a>
+        
+        <a href="ref-glossary.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">📖</span>
+            用語集
+        </a>
+        
+    </nav>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="content">
+        <div class="chapter-nav-top">
+            <a href="../index.html" class="nav-home">🏠 ホーム</a>
+            
+            <a href="00-quick.html" class="nav-prev">← さっとわかる版</a>
+            
+            
+            <a href="02-setup.html" class="nav-next">環境構築 →</a>
+            
+        </div>
+
+        <article class="chapter-body">
+            <hr />
+<h2>title: &quot;00_AIの基礎&quot;
+icon: &quot;🧠&quot;</h2>
+<h1>AIの基礎知識</h1>
+<p>Claude Codeを使いこなす前に、AIがどのように動くのかを理解しておきましょう。原理を知っていれば、「なぜ思った通りに動かないのか」が見えやすくなります。</p>
+<hr />
+<h2>LLMとは？</h2>
+<p><strong>LLM（Large Language Model / 大規模言語モデル）</strong> とは、膨大なテキストデータから言語のパターンを学習した「とても巨大な頭脳」です。</p>
+<pre><code>┌─────────────────────────────────────────────┐
+│  学習データ: ウェブサイト、書籍、会話記録...  │
+│       ↓ 数十億パラメータで学習 ↓             │
+│  ┌─────────────────────────────────┐        │
+│  │  LLM (巨大ニューラルネットワーク)  │        │
+│  └─────────────────────────────────┘        │
+│       ↓ 入力に対して応答生成 ↓               │
+│           「こんにちは」と入力               │
+│           「はい、何かお手伝いしますか？」   │
+└─────────────────────────────────────────────┘
+</code></pre>
+<h3>簡単なたとえ</h3>
+<p>LLMは「何百万冊もの本を読み込んで言語のルールを体得した天才読書家」に似ています。ただし、<strong>一度も読んだことのない内容は知らない</strong>という弱点があります。</p>
+<h3>LLMができること・できないこと</h3>
+<pre><code>✅ 得意なこと                     ❌ 苦手なこと
+────────────────────────────  ──────────────────────────
+・文章の要約・翻訳               ・最新ニュースの確認
+・コードの生成・解説              ・実際の計算（不正確な場合あり）
+・アイデアの壁打ち                ・学習データ以降の出来事
+・質問への回答（一般的な知識）    ・個人的な記憶・感情
+</code></pre>
+<div class="callout callout-info"><p><strong>パラメータ（Parameter）</strong>: ニューラルネットワーク内部の「数値の塊」。学習データから自動的に調整され、GPT-4やClaude 3は数千億個のパラメータを持つ。</p></div>
+<hr />
+<h2>メモリ≠記憶：会話ごとのリセット</h2>
+<p><strong>重要な性質</strong>: LLMは会話の中で「覚えた」ように見えますが，实际上は<strong>各セッションは独立したゼロ地点</strong>から始まります。</p>
+<pre><code>❌ よくある誤解:
+「前の会話で説明を作ったから、次も分かるはず」
+
+✅ 実際の動き:
+各セッション = 白紙状態。前の会話の記憶は引き継がない。
+</code></pre>
+<h3>なぜ「学習」ように見えるのか？</h3>
+<ul>
+<li>会話中は文脈（context）を保持しており、直前の入力を覚えている</li>
+<li>しかし、セッションが終わるとその記憶は完全に消える</li>
+<li>新しいセッションでは、ゼロから始める</li>
+</ul>
+<pre><code>セッションA:              セッションB:
+┌────────────────┐    ┌────────────────┐
+│ こんにちは！   │    │ こんにちは！   │
+│ ○○の作り方を   │    │               │
+│ 教えて         │    │ ← 何も覚えてない│
+└────────────────┘    └────────────────┘
+</code></pre>
+<h3>これが重要になる場面</h3>
+<pre><code>例: コードを書きながら質問する場合
+
+❌ 悪い例:
+「さっき言ったあのバグを直して」
+→ 「さっき」が何のことか分からない
+
+✅ 良い例:
+「src/utils.js の calculateTotal 関数のバグを直してください」
+→ 何をするべきか明確
+</code></pre>
+<hr />
+<h2>ハルシネーション：自信犯の誤り</h2>
+<p><strong>ハルシネーション（Hallucination）</strong> とは、AIが「確信を持って」事実と異なる内容を生成することです。</p>
+<h3>実際の例</h3>
+<pre><code>AI: 「このコードは 安全です。検証済み。」
+実際: コードには重大なセキュリティ脆弱性がある
+</code></pre>
+<h3>なぜ起こるのか？</h3>
+<p>LLMは「次に最もらしい言葉を生成する」仕組みです。**「正解ではなく、最もらしい答え」**を選ぶことがあります。</p>
+<pre><code>学習データの中で:
+「Pythonでは import os が標準的」→ 頻出
+「import system-os は標準的」→ ほぼ出現なし
+
+→ AIは「import os」を選ぶ（よく見るから）
+→ でも、それが本当に正しいかは別問題
+</code></pre>
+<h3>対策：自分で確認する</h3>
+<ol>
+<li><strong>重要な情報は複数ソースで確認</strong> — 1つのAI応答を鵜呑みにしない</li>
+<li><strong>コードは実際に動かして検証</strong> — 「動く」はず、ではなく「動くか？」を確認</li>
+<li><strong>疑いの目で見る</strong> — 「本当に？確信ある？」と確認する</li>
+<li><strong>ドキュメントに当たる</strong> — AIが言ったことを公式ドキュメントで確認</li>
+</ol>
+<pre><code>┌─────────────────────────────────────────────┐
+│  🔍 ハルシネーション チェックフロー          │
+├─────────────────────────────────────────────┤
+│  AIの回答 → 公式サイトで確認 → 合っている？ │
+│       ↓ いいえ                               │
+│  AIの回答を修正 or 別の情報源を探す          │
+└─────────────────────────────────────────────┘
+</code></pre>
+<hr />
+<h2>コンテキストウィンドウ：有限の作業台</h2>
+<p><strong>コンテキストウィンドウ（Context Window）</strong> とは、AIが一時的に保持できる情報の「作業台」のことです。</p>
+<h3>たとえ</h3>
+<pre><code>🎓 教室想象:
+先生（AI）は黑板（コンテキストウィンドウ）に
+限られた量しか書けない。
+
+古い内容を消さないと新しい内容を書けない。
+消えた内容は振り返れない。
+</code></pre>
+<h3>量の目安</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>モデル</th>
+<th>大致的容量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小さいモデル</td>
+<td>~4,000〜8,000 トークン</td>
+</tr>
+<tr>
+<td>大きなモデル</td>
+<td>~128,000〜200,000 トークン</td>
+</tr>
+</tbody>
+</table></div>
+<div class="callout callout-danger"><p><strong>トークン（Token）</strong>: テキストの最小単位。英語では約4文字=1トークン、日本語は1文字≈1〜2トークン。Claude Codeではこの作業台を効率的に使うことが重要。</p></div>
+<h3>コンテキストが足りないとき</h3>
+<pre><code>症状: AIが「さっき言った」と言ってくるが、何も言っていない
+
+原因: 会話が長い→古い内容が切り詰められた
+
+対策:
+1. 重要な情報は最初っからまとめて送る
+2. 定期的に「今我知道的主要内容を確認」と頼む
+3. 新しいセッションで最初から説明し直す
+</code></pre>
+<hr />
+<h2>プロンプト基礎：AIとの上手な会話術</h2>
+<p><strong>プロンプト（Prompt）</strong> とは、AIへの「指示・質問」のことです。上手く書けると、返答の質が大きく上がります。</p>
+<h3>基本原則 3つ</h3>
+<h4>1. 具体的に書く</h4>
+<pre><code>❌ 曖昧:
+「コードを直して」
+
+✅ 具体的:
+「ファイル src/utils.js の calculateTotal 関数で、
+税抜きの計算が間違っているのを修正して」
+</code></pre>
+<h4>2. 例を与える</h4>
+<pre><code>✅ 例あり:
+「日本のアーティストの曲を作ってください。
+例: YOASOBI - 『夜に駆ける』」
+→ ニュアンスが伝わりやすい
+
+❌ 例なし:
+「日本の曲作って」
+→ 「曲」の意味が曖昧（童謡？J-POP？演歌？）
+</code></pre>
+<h4>3. 複雑な任务是分割する</h4>
+<pre><code>❌ 1度に頼む:
+「全新的Webアプリ作って。Reactで、認証付きで、DBはPostgreSQL」
+
+✅ 分割して頼む:
+Step 1: 「Reactプロジェクトの骨組みを作ってください」
+Step 2: 「認証機能を追加してください」
+Step 3: 「データベース接続を設定してください」
+</code></pre>
+<h3>プロンプトの構造テンプレート</h3>
+<pre><code>[立場]: あなたは○○の専門家です
+[目標]: ○○を作成してください
+[制約]: ○○という条件を満たすこと
+[出力]: ○○の形式で結果を出力
+[例]: こんな雰囲気で: ○○
+</code></pre>
+<h3>具体的なプロンプト例</h3>
+<pre><code>【悪い例】
+コード直して
+
+【良い例】
+TypeScriptで ユーティリティ関数を作成してください。
+条件:
+- 引数は2つ（文字列と数値）
+- 戻り値は文字列
+- エラーハンドリングを含める
+例: capitalize(&quot;hello&quot;, 3) → &quot;HEL&quot;
+</code></pre>
+<hr />
+<h2>コスト意識：トークンを無駄にしない</h2>
+<p>LLMのAPI利用は<strong>トークン数に応じて料金が発生</strong>します。</p>
+<pre><code>┌────────────────────────────────────────────┐
+│  💰 コスト 最適化チェックリスト       │
+├────────────────────────────────────────────┤
+│  □ 同じ説明を何度も繰り返していない？        │
+│  □ 長いコード全文を何度も送っていない？       │
+│  □ 曖昧な要求で何度もやり取りしていない？     │
+│  □ 必要最小限の情報だけを送っている？        │
+└────────────────────────────────────────────┘
+</code></pre>
+<h3>具体的な節約術</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>節約方法</th>
+<th>具体的な行動</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>情報を整理して送る</td>
+<td>複数のファイルを1度に説明せず、要点をまとめ</td>
+</tr>
+<tr>
+<td>確認しながら進める</td>
+<td>一気に頼まず、1ステップずつ確認</td>
+</tr>
+<tr>
+<td>文脈を長く使わない</td>
+<td>古い会話内容を「要約」して保持</td>
+</tr>
+<tr>
+<td>出力形式を指定</td>
+<td>「JSONで」「1行で答えて」と指定</td>
+</tr>
+</tbody>
+</table></div>
+<h3>料金節約の実例</h3>
+<pre><code>❌ 非効率:
+「以下の10個のファイルを全部解释して」
+（各ファイルの説明が長く続く）
+
+✅ 効率的:
+「10個のファイルがありますが、先に全体の構成を教えて。
+必要なら詳しく説明します」
+</code></pre>
+<hr />
+<h2>まとめ：AIを使いこなすポイント</h2>
+<pre><code>┌─────────────────────────────────────────────┐
+│           AI基礎 まとめ                      │
+├─────────────────────────────────────────────┤
+│  🧠 LLM = 学習済み巨大頭脳                   │
+│  💾 セッション開始時はメモリクリア            │
+│  ⚠️ ハルシネーションに注意（検証が大事）      │
+│  📝 コンテキストウィンドウは有限（作業台）   │
+│  📌 プロンプトは具体的に・分割して・例示して  │
+│  💰 トークン節約はコスト削減に直結          │
+└─────────────────────────────────────────────┘
+</code></pre>
+<p>次の章では、いよいよ Claude Code を自分のパソコンに導入する方法を説明します。</p>
+
+        </article>
+
+        <nav class="chapter-nav-bottom">
+            
+            <a href="00-quick.html" class="nav-card prev">
+                <span class="nav-label">← 前の章</span>
+                <span class="nav-title">⚡ さっとわかる版</span>
+            </a>
+            
+            <a href="../index.html" class="nav-card home">
+                <span class="nav-label">🏠</span>
+                <span class="nav-title">ホームに戻る</span>
+            </a>
+            
+            <a href="02-setup.html" class="nav-card next">
+                <span class="nav-label">次の章 →</span>
+                <span class="nav-title">🏗️ 環境構築</span>
+            </a>
+            
+        </nav>
+    </main>
+
+    <script src="../assets/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+            themeVariables: { fontSize: '14px' }
+        });
+    </script>
+</body>
+</html>

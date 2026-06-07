@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>さっとわかる版 — AI×Claude Code 教科書</title>
+    <meta name="description" content="AI×Claude Code 教科書 さっとわかる版の解説 — 高校生向けAIコーディング入門">
+    <meta property="og:title" content="さっとわかる版 — AI×Claude Code 教科書">
+    <meta property="og:description" content="AI×Claude Code 教科書 さっとわかる版の解説">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://fukukei23.github.io/claude-code-textbook/chapters/00-quick.html">
+    <meta property="og:image" content="https://fukukei23.github.io/claude-code-textbook/assets/ogp.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <button class="menu-toggle" aria-label="メニュー" id="menuToggle">
+            <span></span><span></span><span></span>
+        </button>
+        <a href="../index.html" class="site-title">📚 AI×Claude Code 教科書</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="テーマ切替">
+            <span class="icon-light">☀️</span>
+            <span class="icon-dark">🌙</span>
+        </button>
+    </header>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html">🏠 ホーム</a>
+        </div>
+        
+        <a href="00-quick.html"
+           class="sidebar-link active">
+            <span class="sidebar-icon">⚡</span>
+            さっとわかる版
+        </a>
+        
+        <a href="01-ai-basics.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🤖</span>
+            AIの基礎
+        </a>
+        
+        <a href="02-setup.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🏗️</span>
+            環境構築
+        </a>
+        
+        <a href="03-usage.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚡</span>
+            Claude Codeの使い方
+        </a>
+        
+        <a href="04-prompting.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">💬</span>
+            プロンプト工学
+        </a>
+        
+        <a href="05-knowledge.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">📚</span>
+            知識管理
+        </a>
+        
+        <a href="06-automation.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⚙️</span>
+            自動化と拡張
+        </a>
+        
+        <a href="07-security.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🔒</span>
+            安全な使い方
+        </a>
+        
+        <a href="08-github.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🐙</span>
+            GitHub入門
+        </a>
+        
+        <a href="ref-commands.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">⌨️</span>
+            コマンドリファレンス
+        </a>
+        
+        <a href="ref-troubleshoot.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">🔧</span>
+            トラブルシューティング
+        </a>
+        
+        <a href="ref-prompts.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">💬</span>
+            プロンプト例文集
+        </a>
+        
+        <a href="ref-glossary.html"
+           class="sidebar-link">
+            <span class="sidebar-icon">📖</span>
+            用語集
+        </a>
+        
+    </nav>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="content">
+        <div class="chapter-nav-top">
+            <a href="../index.html" class="nav-home">🏠 ホーム</a>
+            
+            
+            <a href="01-ai-basics.html" class="nav-next">AIの基礎 →</a>
+            
+        </div>
+
+        <article class="chapter-body">
+            <hr />
+<h2>title: &quot;00 さっとわかる版&quot;
+icon: &quot;⚡&quot;</h2>
+<h1>00 さっとわかる版 — AI×Claude Code 超入門</h1>
+<div class="callout callout-info"><p>このページは、すべての章のポイントを1ページにまとめた「さっとわかる版」です。詳しく知りたい章があれば、リンクから飛んでください。</p></div>
+<hr />
+<h2>AIとは？</h2>
+<h3>一言でいうと</h3>
+<p>AI（人工知能）は、大量のテキストを読んで「こういう時にはこう答える」を学習したコンピュータープログラムです。</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>ポイント</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>文章を理解する</strong></td>
+<td>日本語の質問を理解して答えを生成する</td>
+</tr>
+<tr>
+<td><strong>知識が豊富</strong></td>
+<td>たくさんのデータを学習しているので幅広く答えられる</td>
+</tr>
+<tr>
+<td><strong>嘘をつくことがある</strong></td>
+<td>自信を持って間違ったことを言うことがある（ハルシネーション）</td>
+</tr>
+</tbody>
+</table></div>
+<div class="callout callout-warn"><p>⚠️ <strong>重要</strong>: AIの答えを信じる前に、自分でも確かめよう！</p></div>
+<h3>AIとClaude Codeの関係</h3>
+<ul>
+<li><strong>AI</strong>: 答えを考える部分（頭脳）</li>
+<li><strong>Claude Code</strong>: AIを使ってコードを書いてくれる道具</li>
+</ul>
+<hr />
+<h2>Claude Code 超まとめ</h2>
+<h3>一言でいうと</h3>
+<p>Claude Codeは、<strong>AIにコードを書かせる道具</strong>です。コマンドを入力すると、AIが代わりにコードを書いてくれます。</p>
+<h3>使えるコマンド</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>コマンド</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>claude</code></td>
+<td>対話モードで起動</td>
+</tr>
+<tr>
+<td><code>claude &quot;質問&quot;</code></td>
+<td>1回だけ質問して終了</td>
+</tr>
+<tr>
+<td><code>/help</code></td>
+<td>ヘルプを表示</td>
+</tr>
+<tr>
+<td><code>/clear</code></td>
+<td>会話をリセット</td>
+</tr>
+<tr>
+<td><code>/exit</code></td>
+<td>終了</td>
+</tr>
+</tbody>
+</table></div>
+<h3>便利な機能</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>機能</th>
+<th>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>スキル</strong></td>
+<td>よく使う指示を保存して自動化</td>
+</tr>
+<tr>
+<td><strong>Memory</strong></td>
+<td>セッションをまたいで覚えておく</td>
+</tr>
+<tr>
+<td><strong>フック</strong></td>
+<td>特定のタイミングで自動実行</td>
+</tr>
+<tr>
+<td><strong>MCP</strong></td>
+<td>外部サービスを接続して機能を拡張</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>プロンプトのコツ</h2>
+<h3>良いプロンプトの3原則</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>原則</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>具体的に</strong></td>
+<td>「ファイルを作成して」ではなく「todo-appフォルダにindex.htmlを作成して」</td>
+</tr>
+<tr>
+<td><strong>結果を指定</strong></td>
+<td>「表形式で出して」「日本語で答えて」</td>
+</tr>
+<tr>
+<td><strong>段階的に</strong></td>
+<td>複雑な作業はまず大枠を説明してから詳細を伝える</td>
+</tr>
+</tbody>
+</table></div>
+<h3>よく使うパターン</h3>
+<pre><code>✅ 良い例: 「Pythonで hello.py を作成。中身は Hello World と表示する」
+❌ 悪い例: 「作って」
+</code></pre>
+<hr />
+<h2>GitHub 超まとめ</h2>
+<h3>一言でいうと</h3>
+<p>GitHubは、<strong>コードをクラウドに保存できるサービス</strong>です。消えない・変更履歴が残る・他の人と共同できます。</p>
+<h3>基本の流れ</h3>
+<pre><code>作業 → git add（選択）→ git commit（記録）→ git push（アップロード）
+</code></pre>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>コマンド</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git clone URL</code></td>
+<td>初回にリポジトリをコピー</td>
+</tr>
+<tr>
+<td><code>git add ファイル</code></td>
+<td>コミット対象を選ぶ</td>
+</tr>
+<tr>
+<td><code>git commit -m &quot;説明&quot;</code></td>
+<td>変更を記録</td>
+</tr>
+<tr>
+<td><code>git push</code></td>
+<td>クラウドに上げる</td>
+</tr>
+<tr>
+<td><code>git pull</code></td>
+<td>最新版を取得</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>安全に使うための約束</h2>
+<h3>3つの約束</h3>
+<pre><code>① APIキーは外部に見せない
+   → 環境変数で管理、.gitignoreに追加
+
+② 危険な操作は確認を読んでから
+   → 「本当に消しますか？」にはよく考えよう
+
+③ 小まめにコミット
+   → 問題が起きたら巻き戻せる
+</code></pre>
+<h3>APIキー流出の怖さ</h3>
+<pre><code>❌ GitHubにAPIキーをpush → 世界中に公開 → 多額の請求が来る
+❌ スクリーンショットにAPIキーを映す → SNSで拡散される
+</code></pre>
+<h3>お金の知識</h3>
+<ul>
+<li>AIは「文字量」で料金が決まる</li>
+<li><code>/context</code> で今のコストを確認できる</li>
+<li>長いセッションは費用が高額になる</li>
+</ul>
+<hr />
+<h2>知識管理（SSOT）の概念</h2>
+<h3>SSOT = Single Source of Truth</h3>
+<p>「情報が散らばるとややこしいので、<strong>正しい情報を1箇所にまとめる</strong>」という考え方。</p>
+<pre><code>❌ 困ったとき
+   - メモ帳Aには○○と書いてある
+   - メモ帳Bには××と書いてある
+   - どちらが正しいか分からない！
+
+✅ SSOTなら
+   - 正しい答えはここにしかない
+   - 迷ったらここを見ればいい
+</code></pre>
+<h3>日記の書き方</h3>
+<pre><code>## セッションログ (時刻)
+- やったこと（3〜5行）
+- 詳細: ファイル名
+</code></pre>
+<hr />
+<h2>自動化の便利な機能</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>機能</th>
+<th>いつ使う</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>フック</strong></td>
+<td>「○○の前」に自動実行</td>
+</tr>
+<tr>
+<td><strong>Cron</strong></td>
+<td>「毎朝3時」に定期実行</td>
+</tr>
+<tr>
+<td><strong>MCPサーバー</strong></td>
+<td>新しい機能を追加</td>
+</tr>
+<tr>
+<td><strong>スキル</strong></td>
+<td>よく使う指示を保存</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>まとめ表</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>知りたいこと</th>
+<th>参照先</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AI/LLMとは</td>
+<td>01_AIの基礎</td>
+</tr>
+<tr>
+<td>Claude Codeの導入方法</td>
+<td>02_環境構築</td>
+</tr>
+<tr>
+<td>Claude Codeの基本使い方</td>
+<td>03_Claude-Code使い方</td>
+</tr>
+<tr>
+<td>もっと上手く伝えるコツ</td>
+<td>04_プロンプト工学</td>
+</tr>
+<tr>
+<td>記録する理由</td>
+<td>05_知識管理</td>
+</tr>
+<tr>
+<td>自動化の仕組み</td>
+<td>06_自動化と拡張</td>
+</tr>
+<tr>
+<td>安全に使うには</td>
+<td>07_安全な使い方</td>
+</tr>
+<tr>
+<td>コードの保存と共有</td>
+<td>08_GitHub入門</td>
+</tr>
+<tr>
+<td>コマンド一覧</td>
+<td>別冊_コマンドリファレンス</td>
+</tr>
+<tr>
+<td>エラーが起きたら</td>
+<td>別冊_トラブルシューティング</td>
+</tr>
+<tr>
+<td>用語の意味が分からない</td>
+<td>別冊_用語集</td>
+</tr>
+<tr>
+<td>すぐ使える例文</td>
+<td>別冊_プロンプト例文集</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>さっとわかるまとめ</h2>
+<ul>
+<li><strong>AI</strong> = 言葉を理解して答えるコンピュータ</li>
+<li><strong>Claude Code</strong> = AIにコードを書かせる道具</li>
+<li><strong>プロンプト</strong> = 具体的に・結果を指定・段階的に</li>
+<li><strong>GitHub</strong> = コードをクラウドに保存</li>
+<li><strong>安全</strong> = APIキー管理・確認を読む・小まめにコミット</li>
+</ul>
+<p>これがわかればOK！詳しく知りたければ各章へどうぞ。</p>
+
+        </article>
+
+        <nav class="chapter-nav-bottom">
+            
+            <a href="../index.html" class="nav-card home">
+                <span class="nav-label">🏠</span>
+                <span class="nav-title">ホームに戻る</span>
+            </a>
+            
+            <a href="01-ai-basics.html" class="nav-card next">
+                <span class="nav-label">次の章 →</span>
+                <span class="nav-title">🤖 AIの基礎</span>
+            </a>
+            
+        </nav>
+    </main>
+
+    <script src="../assets/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+            themeVariables: { fontSize: '14px' }
+        });
+    </script>
+</body>
+</html>
