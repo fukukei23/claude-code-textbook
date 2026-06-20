@@ -147,6 +147,12 @@
             clearHighlights();
             if (!text) return;
 
+            // 入力長上限（過度に長い入力による正規計算量増大を防止）
+            var MAX_SEARCH_LEN = 100;
+            if (text.length > MAX_SEARCH_LEN) {
+                text = text.slice(0, MAX_SEARCH_LEN);
+            }
+
             var walker = document.createTreeWalker(body, NodeFilter.SHOW_TEXT, null, false);
             var nodes = [];
             while (walker.nextNode()) nodes.push(walker.currentNode);
