@@ -129,8 +129,28 @@
 icon: &quot;⚙️&quot;</h2>
 <h1>05 自動化と拡張</h1>
 <p>Claude Code はそのままでも強力ですが、設定次第でさらに便利になります。この章では、AI アシスタントの能力を自動的広げる仕組みを説明します。</p>
-<h2>05-1 フック（Hooks）:自動化の核心</h2>
-<p>フックとは、特定のタイミング自動的に実行されるスクリプトです。Claude Code のワークフローのあらゆる瞬間に、あなたのカスタム処理を差し込めます。</p>
+<div class="mermaid-wrapper"><div class="mermaid">
+sequenceDiagram
+    participant U as ユーザー
+    participant CC as Claude Code
+    participant Pre as PreToolUse
+    participant Tool as ツール
+    participant Post as PostToolUse
+
+    Note over CC: 🔄 SessionStart Hook発火
+    U->>CC: リクエスト送信
+    CC->>Pre: ツール実行前チェック
+    alt チェックOK
+        Pre->>Tool: ✅ ツール実行
+        Tool->>Post: 実行完了
+        Post->>CC: ログ記録
+    else チェックNG
+        Pre-->>CC: 🚫 ブロック
+    end
+    CC->>U: レスポンス
+    Note over CC: 🔄 Stop Hook発火
+</div></div><h2>05-1 フック（Hooks）:自動化の核心</h2>
+<p>フックとは、特定のタイミング自動的に実行されるスクリプトです。Claude Code のワークフローのあらゆる瞬間に、カスタム処理を差し込めます。</p>
 <p>###代表的なフックの種類</p>
 <div class="table-wrapper"><table>
 <thead>
@@ -144,7 +164,7 @@ icon: &quot;⚙️&quot;</h2>
 <tr>
 <td>SessionStart</td>
 <td>セッション開始時</td>
-<td>前回の続き読み取り、最新ファイル確認</td>
+<td>前回の続き读取、最新ファイル確認</td>
 </tr>
 <tr>
 <td>AfterEveryGeneration</td>
@@ -153,18 +173,18 @@ icon: &quot;⚙️&quot;</h2>
 </tr>
 <tr>
 <td>BeforeTask</td>
-<td>タスク開始前</td>
+<td>作业开始前</td>
 <td>プロジェクト状态確認、コンテキスト整備</td>
 </tr>
 <tr>
 <td>AfterTool</td>
 <td>ツール実行後</td>
-<td>ファイル変更検知、セキュリティチェック</td>
+<td>ファイル变更検知、セキュリティチェック</td>
 </tr>
 </tbody>
 </table></div>
 <h3>フックの動作流れ</h3>
-<p>以下に、Mermaid を使用してフックの処理流れを可視化します。</p>
+<p>以下に、Mermaid を使用してフックの処理流れを可视化管理します。</p>
 <pre><code class="language-mermaid">sequenceDiagram
     participant User as ユーザー
     participant Claude as Claude Code
@@ -179,7 +199,7 @@ icon: &quot;⚙️&quot;</h2>
     Hook--&gt;&gt;Claude: 完了通知
     Claude--&gt;&gt;User: 最終結果を返す
 </code></pre>
-<p>この流れを見てわかるとおり、フックはClaude Code の動作の合間に介入します。ユーザーは意識せずに、自動化された処理が裏で動いています。</p>
+<p>この流れを見てわかるとおり、フックはClaude Code の动作の合間に介入します。ユーザーは意識せずに、自動化された処理が裏で動いています。</p>
 <h3>実用的なフックの例</h3>
 <p>以下は、ファイル変更を検出して自動コミットする Bash スクリプトの例です。</p>
 <pre><code class="language-bash">#!/bin/bash
@@ -221,7 +241,7 @@ done
 <h2>05-3 MCPサーバー: 拡張機能のplugins</h2>
 <p>MCP（Model Context Protocol）サーバーは、Claude Code に専門的な機能を追加する「plugins」です。</p>
 <h3>どんな時に使う</h3>
-<p>MCP サーバーを導入すると、Claude Code が標準で持っていない機能を使えるようになります。</p>
+<p>MCP サーバーを導入すると、Claude Code が标准で持っていない機能を使えるようになります。</p>
 <ul>
 <li><strong>Web検索</strong>:最新の情報をオンラインで検索</li>
 <li><strong>GitHub API</strong>: リポジトリ操作を自動化</li>
@@ -250,7 +270,7 @@ done
 <ul>
 <li>コードレビュー用の定型プロンプト</li>
 <li>新しいプロジェクトの初期セットアップフロー</li>
-<li>定例レポートのドキュメント型</li>
+<li>定例报告の书类型</li>
 </ul>
 <p>スキルは主に <code>~/.claude/skills/</code> フォルダに Markdownファイルとして保存します。ファイル名をキーワードとして登録し、内容をプロンプトテンプレートとして使えます。</p>
 <h2>05-5 セキュリティ上の注意</h2>
@@ -259,7 +279,7 @@ done
 <ul>
 <li>不用意にファイルを削除するスクリプトは危险です</li>
 <li>「動作確認なしに自動実行」は避けましょう</li>
-<li>ログを出力して、何が実行されたかを常に記録しましょう</li>
+<li>ログを出力して、何动了かを常に記録しましょう</li>
 </ul>
 <p><strong>権限の管理</strong></p>
 <ul>
@@ -270,7 +290,7 @@ done
 <p><strong>外部服务的連携</strong></p>
 <ul>
 <li>API キーをスクリプトに直接記述しない</li>
-<li>代わりに環境変数や <code>.secrets.env</code> を使用します</li>
+<li>代わりに环境変数や <code>.secrets.env</code> を使用します</li>
 <li>権限のあるユーザーのみアクセス可能な場所にSecrets を保存します</li>
 </ul>
 <p>自動化は生産性を大きく向上させますが、責任も伴います。 小さなリスクから始めて、効果を確認しながら段階的に拡大しましょう。</p>

@@ -189,9 +189,22 @@ TABLE_COL_SANITIZE = [
 ]
 
 MERMAID_DIAGRAMS = {
-    "01_基礎概念.md": [
+    "01_AIの基礎.md": [
         (
-            "## アーキテクチャ",
+            "## コンテキストウィンドウ：有限の作業台",
+            """graph LR
+    subgraph "200K トークン コンテキストウィンドウ"
+        A["システムプロンプト<br/>~3%"]
+        B["ツール定義<br/>~20%"]
+        C["メモリ・スキル<br/>~4%"]
+        D["会話履歴<br/>~3%"]
+        E["空き容量<br/>~70%"]
+    end""",
+        ),
+    ],
+    "03_Claude-Code使い方.md": [
+        (
+            "## 1. Claude Codeのはじまり方",
             """graph TD
     User["👤 ユーザー"] --> CLI["💻 Claude Code CLI"]
     CLI --> SP["📋 システムプロンプト"]
@@ -207,21 +220,27 @@ MERMAID_DIAGRAMS = {
     LLM --> Resp["💬 レスポンス"]
     Resp --> User""",
         ),
+    ],
+    "05_知識管理.md": [
         (
-            "## コンテキストの仕組み",
-            """graph LR
-    subgraph "200K トークン コンテキストウィンドウ"
-        A["システムプロンプト<br/>~3%"]
-        B["ツール定義<br/>~20%"]
-        C["メモリ・スキル<br/>~4%"]
-        D["会話履歴<br/>~3%"]
-        E["空き容量<br/>~70%"]
-    end""",
+            "## 04-6 応用：CLAUDE.md の 3 層メモリ構造",
+            """graph TD
+    subgraph "🧠 メモリシステム"
+        AUTO["Auto Memory<br/>~/.claude/projects/"]
+        USER["User Memory<br/>~/.claude/CLAUDE.md"]
+        PROJ["Project Memory<br/>repo/CLAUDE.md"]
+        IDX["MEMORY.md<br/>インデックス"]
+    end
+    AUTO --> T1["user: 役割・目標"]
+    AUTO --> T2["feedback: 指導"]
+    AUTO --> T3["project: 決定事項"]
+    AUTO --> T4["reference: 外部参照"]
+    IDX --> AUTO""",
         ),
     ],
-    "05_フック.md": [
+    "06_自動化と拡張.md": [
         (
-            "## 4種のフック",
+            "## 05-1 フック（Hooks）:自動化の核心",
             """sequenceDiagram
     participant U as ユーザー
     participant CC as Claude Code
@@ -241,66 +260,6 @@ MERMAID_DIAGRAMS = {
     end
     CC->>U: レスポンス
     Note over CC: 🔄 Stop Hook発火""",
-        ),
-    ],
-    "06_メモリ.md": [
-        (
-            "## メモリの種類",
-            """graph TD
-    subgraph "🧠 メモリシステム"
-        AUTO["Auto Memory<br/>~/.claude/projects/"]
-        USER["User Memory<br/>~/.claude/CLAUDE.md"]
-        PROJ["Project Memory<br/>repo/CLAUDE.md"]
-        IDX["MEMORY.md<br/>インデックス"]
-    end
-    AUTO --> T1["user: 役割・目標"]
-    AUTO --> T2["feedback: 指導"]
-    AUTO --> T3["project: 決定事項"]
-    AUTO --> T4["reference: 外部参照"]
-    IDX --> AUTO""",
-        ),
-    ],
-    "07_エージェント.md": [
-        (
-            "## 並列実行の例",
-            """graph TD
-    MAIN["🖥️ メインセッション"] --> A1["🔍 エージェントA<br/>コード探索"]
-    MAIN --> A2["📝 エージェントB<br/>レビュー"]
-    MAIN --> A3["🧪 エージェントC<br/>テスト実行"]
-    A1 --> |"結果"| MAIN
-    A2 --> |"結果"| MAIN
-    A3 --> |"結果"| MAIN
-    MAIN --> |"統合表示"| USER["👤 ユーザー"]""",
-        ),
-    ],
-    "08_設定ファイル.md": [
-        (
-            "## 設定の3層構造",
-            """graph BT
-    L1["Layer 1: グローバル<br/>~/.claude/CLAUDE.md<br/>全プロジェクト共通"]
-    L2["Layer 2: プロジェクト<br/>repo/CLAUDE.md<br/>プロジェクト固有"]
-    L3["Layer 3: ディレクトリ<br/>repo/dir/CLAUDE.md<br/>特定ディレクトリ"]
-    L3 -->|"上書き"| L2
-    L2 -->|"上書き"| L1
-    style L3 fill:#e8f5e9
-    style L2 fill:#fff3e0
-    style L1 fill:#e3f2fd""",
-        ),
-    ],
-    "09_統合.md": [
-        (
-            "## モデル切替",
-            """graph TD
-    A["📋 タスク受付"] --> B{"Opus<br/>デフォルト"}
-    B -->|"成功"| C["✅ 結果返却"]
-    B -->|"失敗"| D{"Haiku<br/>フォールバック"}
-    D -->|"成功"| C
-    B -->|"大量処理"| E["軽量モデルに委譲"]
-    E --> C
-    B -->|"高品質必要"| F{"👤 ユーザー確認"}
-    F -->|"許可"| G["上位モデルで処理"]
-    G --> C
-    F -->|"拒否"| B""",
         ),
     ],
 }
@@ -481,7 +440,37 @@ INDEX_TEMPLATE = Template("""\
 # --- フィルタリング ---
 
 def filter_sections(text: str) -> str:
-    """教材はスクラッチ作成なので個人情報フィルタ不要."""
+    """教材の個人情報・内部参照・非公開セクションをサニタイズ.
+
+    - 非公開H2セクション（## 関連 / ## あなたの…）を次のH2まで削除
+    - 非公開H3セクション（### あなたの…）を次のH2/H3まで削除
+    - INLINE_REPLACEMENTS: 個人ルーティング情報→汎用化・内部パス除去
+    - TABLE_COL_SANITIZE: テーブル列の個人設定→汎用化
+    - ユーザー名・ID（yn4416/fukukei）除去
+    """
+    # 1. 非公開 H2 セクション削除（次の H2 または文末まで）
+    text = re.sub(
+        r'^## (関連|あなたの).*?(?=^## |\Z)',
+        '',
+        text,
+        flags=re.MULTILINE | re.DOTALL,
+    )
+    # 2. 非公開 H3 セクション削除（次の H2/H3 または文末まで）
+    text = re.sub(
+        r'^### あなたの.*?(?=^## |^### |\Z)',
+        '',
+        text,
+        flags=re.MULTILINE | re.DOTALL,
+    )
+    # 3. インライン置換（個人ルーティング情報→汎用化・内部パス除去）
+    for pattern, replacement in INLINE_REPLACEMENTS:
+        text = re.sub(pattern, replacement, text)
+    # 4. テーブル列サニタイズ
+    for pattern, replacement in TABLE_COL_SANITIZE:
+        text = re.sub(pattern, replacement, text)
+    # 5. ユーザー名・ID 除去
+    for secret_id in ("yn4416", "fukukei"):
+        text = text.replace(secret_id, "")
     return text
 
 
@@ -599,6 +588,10 @@ def main():
     assets_dir = OUTPUT_DIR / "assets"
     chapters_dir.mkdir(parents=True, exist_ok=True)
     assets_dir.mkdir(parents=True, exist_ok=True)
+
+    # 古い生成物をクリア（CHAPTER_MAPから外れた章の残骸を除去し、クリーンビルドを保証）
+    for stale in chapters_dir.glob("*.html"):
+        stale.unlink()
 
     # 章リストを構築（自動スキャン込み）
     effective_map = build_chapter_map()

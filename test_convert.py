@@ -1,6 +1,7 @@
 """convert.py のテスト — 個人情報除去・リンク書き換え・セクションフィルタリング."""
 
 import re
+from urllib.parse import quote
 
 import pytest
 
@@ -124,21 +125,22 @@ class TestRewriteLinks:
     """rewrite_links() の単体テスト."""
 
     def test_md_links_to_html(self):
-        html = '<a href="01_基礎概念.md">link</a>'
+        html = '<a href="01_AIの基礎.md">link</a>'
         result = rewrite_links(html)
-        assert 'href="01-basics.html"' in result
+        assert 'href="01-ai-basics.html"' in result
         assert ".md" not in result
 
     def test_md_link_with_anchor(self):
-        html = '<a href="02_コマンド一覧.md#clear">link</a>'
+        html = '<a href="02_環境構築.md#setup">link</a>'
         result = rewrite_links(html)
-        assert 'href="02-commands.html#clear"' in result
+        assert 'href="02-setup.html#setup"' in result
 
     def test_url_encoded_md_links(self):
-        html = '<a href="11_%E7%8F%BE%E5%A0%B4%E3%81%AE%E7%9F%A5%E8%A6%8B.md">link</a>'
+        encoded = quote("01_AIの基礎.md", safe='')
+        html = f'<a href="{encoded}">link</a>'
         result = rewrite_links(html)
         assert ".md" not in result
-        assert "11-tips.html" in result
+        assert "01-ai-basics.html" in result
 
     def test_unknown_md_links_to_hash(self):
         html = '<a href="unknown_file.md">link</a>'
@@ -163,8 +165,8 @@ class TestMermaidInjection:
     """inject_mermaid() の単体テスト."""
 
     def test_injects_diagram(self):
-        html = "<h2>アーキテクチャ</h2><p>text</p>"
-        result = inject_mermaid(html, "01_基礎概念.md")
+        html = "<h2>1. Claude Codeのはじまり方</h2><p>text</p>"
+        result = inject_mermaid(html, "03_Claude-Code使い方.md")
         assert "mermaid-wrapper" in result
         assert "graph TD" in result
 

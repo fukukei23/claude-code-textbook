@@ -130,7 +130,22 @@ icon: &quot;terminal&quot;</h2>
 <h1>Claude Code使い方</h1>
 <p>Claude Codeは、ターミナル（コマンドプロンプト）の中で動くAIアシスタントです。従来のブラウザ上のAI不同的是、<strong>実際のファイルを編集したり、コマンドを実行したり、Git操作もできます</strong>。この章では、Claude Codeの基本的な使い方と、主要な概念をゼロから説明します。</p>
 <hr />
-<h2>1. Claude Codeのはじまり方</h2>
+<div class="mermaid-wrapper"><div class="mermaid">
+graph TD
+    User["👤 ユーザー"] --> CLI["💻 Claude Code CLI"]
+    CLI --> SP["📋 システムプロンプト"]
+    CLI --> MCP["🔌 MCPツール定義"]
+    CLI --> SK["🎯 スキル定義"]
+    CLI --> MEM["🧠 メモリ読込"]
+    CLI --> LLM["🤖 LLM"]
+    LLM --> Tools["🔧 ツール実行"]
+    Tools --> Files["📁 ファイル操作"]
+    Tools --> Shell["💻 シェル実行"]
+    Tools --> API["🌐 API呼出"]
+    Tools --> Agent["🤖 サブエージェント"]
+    LLM --> Resp["💬 レスポンス"]
+    Resp --> User
+</div></div><h2>1. Claude Codeのはじまり方</h2>
 <h3>起動コマンド</h3>
 <p>ターミナルで以下のコマンドを入力します。</p>
 <pre><code class="language-bash">$ claude
@@ -223,7 +238,7 @@ Building context from recent files...
   }
 }
 </code></pre>
-<p>ただし、<code>allow all</code>（すべて許可）は絶対に設定しないでください。AIが誤った判断をした場合に、手遅れになる可能性があります。</p>
+<p>ただし、<code>allow all</code>（すべて許可）は絶対に設定しないでください。AIが误った判断をした场合に、手遅れになる可能性があります。</p>
 <hr />
 <h2>3. 基本的なスラッシュコマンド</h2>
 <p>Claude Codeでは <code>/</code> で始まるコマンドを使って動作を制御します。利用可能なコマンドは以下の通りです。</p>
@@ -249,7 +264,7 @@ Building context from recent files...
 </tr>
 <tr>
 <td><code>/compact</code></td>
-<td>長いセッションのコンテキストを圧縮して整理する</td>
+<td>長いセッションのコンテキストを压缩して整理する</td>
 </tr>
 <tr>
 <td><code>/exit</code></td>
@@ -309,7 +324,7 @@ Building context from recent files...
 <hr />
 <h2>5. スキル（Skills）とは</h2>
 <p>スキルは、特定のタスクに備えて自動化された<strong>プロンプトテンプレート</strong>です。あなたが「〜について調査して」「〜を作って」と言ったとき、関連するスキルが自動的に激活します。</p>
-<pre><code>あなたの入力: 「Deep Researchで○○について調査して」
+<pre><code>入力例: 「Deep Researchで○○について調査して」
 
          ↓ スキルが自動検出
 ┌──────────────────────────────┐
@@ -352,7 +367,7 @@ Building context from recent files...
 </table></div>
 <p>スキルは標準で備わっているものもあれば、あなたが自作できるものもあります。「よくやる作業」をスキルとして登録しておくと、同じ指示を简単 復できて便利です。</p>
 <h3>スキルが激活する流れ</h3>
-<p>スキルは「自動激活」と「手動激活」の2通りがあります。手動激活は <code>/skill-name</code> のように直接コマンドを入力する方法です。自動激活は、あなたの入力文をClaudeが分析し、関連するスキルを自動的に選択して実行します。</p>
+<p>スキルは「自動激活」と「手動激活」の2通りがあります。手動激活は <code>/skill-name</code> のように直接コマンドを入力する方法です。自動激活は、入力文をClaudeが分析し、関連するスキルを自動的に選択して実行します。</p>
 <pre><code class="language-mermaid">flowchart TD
     A[&quot;ユーザーの入力&quot;] --&gt; B{&quot;スキル相关?&quot;}
     B --&gt;|はい| C[&quot;スキルを自動激活&quot;]
@@ -405,7 +420,7 @@ Building context from recent files...
 </tr>
 <tr>
 <td><code>context7</code></td>
-<td>ライブラリの最新ドキュメントを即時取得</td>
+<td>ライブラリの最新ドキュメントを即时取得</td>
 </tr>
 <tr>
 <td><code>discord</code></td>
@@ -530,7 +545,7 @@ Building context from recent files...
 <p>次の章では、こうしたClaude Codeを効果的に使うための「プロンプトの書き方」を説明します。</p>
 <hr />
 <h2>8. コマンドライン引数による起動オプション</h2>
-<p><code>claude</code> コマンドには様々な起動引数があります。用途に応じて使い分けましょう。</p>
+<p><code>claude</code> コマンドには様々な启动引数があります。用途に応じて使い分けましょう。</p>
 <p>###よく使う起動オプション</p>
 <div class="table-wrapper"><table>
 <thead>
@@ -616,7 +631,7 @@ $ claude --print &quot;このコードのバグを直して&quot; &lt; auth.py
 │  → エラーがあれば報告 │
 └──────────────────────────────┘
 </code></pre>
-<p>各段階でClaudeは「考える」ことができます，<code>/compact</code> はこの「考える」履歴を圧縮する操作です。流れを理解しておくと、「なぜここで止まるのだろう」と感じたときに原因を特定しやすくなります。</p>
+<p>各段階でClaudeは「考える」ことができます，<code>/compact</code> はこの「考える」履歴を压缩する操作です。流れを理解しておくと、「なぜここで止まるのだろう」と感じたときに原因を特定しやすくなります。</p>
 <hr />
 <h2>11. まとめ：この章で学んだこと</h2>
 <div class="table-wrapper"><table>
